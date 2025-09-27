@@ -1,0 +1,51 @@
+review_id,reviewer_name,review_text,rating,sentiment,review_date,product_category
+R001,Alice Johnson,"Product works as expected, nothing special but does the job.",3,neutral,2024-12-27,Chargers
+R002,Alice Johnson,"Works as advertised, no major complaints.",3,neutral,2025-06-21,Cases
+R003,Grace Lee,Interface is confusing and hard to navigate.,1,negative,2025-04-06,Electronics
+R004,Bob Smith,Audio quality is exceptional with deep bass.,5,positive,2025-07-21,Phone Accessories
+R005,Carol Davis,"Camera quality is outstanding, even in low light conditions.",4,positive,2025-04-11,Electronics
+R006,Bob Smith,"Good enough for casual use, not for heavy users.",3,neutral,2025-02-05,Phone Accessories
+R007,Bob Smith,Average quality for the price range. Could be better.,3,neutral,2025-01-29,Phone Accessories
+R008,Frank Miller,Works perfectly with all my devices.,5,positive,2025-01-04,Phone Accessories
+R009,Jack Robinson,"Charging is extremely slow, takes forever.",2,negative,2024-12-12,Cases
+R010,Ivy Chen,Fast charging works perfectly. Great value for money.,5,positive,2025-06-07,Cases
+R011,David Wilson,Perfect fit and excellent build quality. Highly recommend!,4,positive,2025-01-05,Phone Accessories
+R012,Henry Taylor,Excellent customer service and quick response.,4,positive,2025-01-19,Phone Accessories
+R013,Jack Robinson,Amazing battery life! Lasts all day even with heavy usage.,5,positive,2024-12-12,Phone Accessories
+R014,Bob Smith,Overheats during normal use.,1,negative,2024-12-30,Electronics
+R015,Alice Johnson,"Decent product, meets basic requirements.",3,neutral,2024-12-19,Cases
+R016,Emily Brown,Design is sleek and modern. Looks premium.,4,positive,2025-01-16,Electronics
+R017,Jack Robinson,Connectivity issues with most devices.,1,negative,2025-01-22,Cases
+R018,Bob Smith,Too heavy and bulky for everyday carry.,2,negative,2025-04-08,Electronics
+R019,Alice Johnson,Fast charging works perfectly. Great value for money.,5,positive,2025-05-19,Cases
+R020,Jack Robinson,This product exceeded my expectations! Great quality and fast delivery.,5,positive,2025-03-19,Phone Accessories
+R021,David Wilson,"Charging is extremely slow, takes forever.",2,negative,2025-08-27,Electronics
+R022,Carol Davis,Excellent customer service and quick response.,4,positive,2025-03-31,Chargers
+R023,Ivy Chen,"Poor build quality, feels cheap and flimsy.",2,negative,2025-07-11,Chargers
+R024,Emily Brown,Bluetooth connectivity is seamless and stable.,5,positive,2025-04-13,Chargers
+R025,Jack Robinson,Too heavy and bulky for everyday carry.,2,negative,2024-10-27,Electronics
+R026,Frank Miller,"Battery drains too quickly, barely lasts half a day.",1,negative,2025-05-07,Electronics
+R027,David Wilson,"Camera quality is outstanding, even in low light conditions.",4,positive,2025-05-22,Electronics
+R028,Ivy Chen,Fast charging works perfectly. Great value for money.,5,positive,2025-05-18,Cases
+R029,Carol Davis,"Camera quality is outstanding, even in low light conditions.",4,positive,2025-04-15,Phone Accessories
+R030,Bob Smith,It works fine but took a while to get used to.,3,neutral,2025-01-23,Chargers
+R031,Grace Lee,Screen is crystal clear and colors are vibrant. Love it!,5,positive,2025-08-06,Cases
+R032,Henry Taylor,Excellent value proposition for the price.,4,positive,2025-07-21,Cases
+R033,Alice Johnson,"Fair value for money, gets the job done.",3,neutral,2025-08-21,Phone Accessories
+R034,Frank Miller,Excellent value proposition for the price.,5,positive,2025-04-20,Chargers
+R035,Alice Johnson,Audio quality is terrible with lots of static.,2,negative,2025-03-20,Cases
+R036,Henry Taylor,"Very slow performance, constant lag.",1,negative,2025-01-18,Phone Accessories
+R037,Grace Lee,Audio quality is exceptional with deep bass.,4,positive,2025-02-17,Chargers
+R038,Henry Taylor,"Good enough for casual use, not for heavy users.",3,neutral,2024-10-03,Cases
+R039,David Wilson,"Camera quality is outstanding, even in low light conditions.",4,positive,2025-08-30,Phone Accessories
+R040,Henry Taylor,Customer service was unhelpful and rude.,2,negative,2025-03-01,Electronics
+R041,Ivy Chen,Wireless connectivity works flawlessly.,5,positive,2024-11-09,Electronics
+R042,Ivy Chen,Setup was quick and straightforward.,5,positive,2025-03-13,Phone Accessories
+R043,Frank Miller,"Charging is extremely slow, takes forever.",1,negative,2024-11-08,Electronics
+R044,Ivy Chen,Perfect fit and excellent build quality. Highly recommend!,5,positive,2025-07-28,Chargers
+R045,Ivy Chen,Interface is confusing and hard to navigate.,2,negative,2024-11-16,Electronics
+R046,Ivy Chen,Product stopped working after two months.,1,negative,2025-07-27,Electronics
+R047,Frank Miller,Perfect fit and excellent build quality. Highly recommend!,5,positive,2025-05-28,Phone Accessories
+R048,Emily Brown,"Standard features, nothing groundbreaking.",3,neutral,2025-07-08,Phone Accessories
+R049,Ivy Chen,"Standard features, nothing groundbreaking.",3,neutral,2024-11-30,Cases
+R050,Alice Johnson,"Quality is okay, similar to other products in this range.",3,neutral,2025-05-18,Cases
