@@ -3,6 +3,10 @@
 venv/
 env/
 
+# JSON files (exclude all JSON files to avoid large file issues)
+*.json
+*.jsonl
+
 # Python cache files
 __pycache__/
 *.py[cod]
