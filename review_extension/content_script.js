@@ -26,36 +26,39 @@ const FLIPKART_REVIEW_TEXT_SELECTORS = [
 ];
 
 // --- Auto-expand reviews and load more ---
-function expandAndLoadMoreReviews(maxAttempts = 3) {
+function expandAndLoadMoreReviews(maxAttempts = 2) {
     return new Promise(async (resolve) => {
         let attempts = 0;
-        let totalReviews = [];
+        let totalReviews = scrapeReviewsFromPage(); // Start with current reviews
+        const initialCount = totalReviews.length;
+        
+        console.log(`Starting expansion with ${initialCount} reviews`);
 
         while (attempts < maxAttempts) {
             attempts++;
-            console.log(`Loading more reviews - attempt ${attempts}/${maxAttempts}`);
+            console.log(`Expansion attempt ${attempts}/${maxAttempts}`);
 
             // First, try to expand "Read more" links within individual reviews
             const readMoreButtons = document.querySelectorAll('[data-hook="expand-collapse-content"]');
+            let expandedAny = false;
             readMoreButtons.forEach(button => {
                 if (button.innerText.includes('Read more')) {
                     button.click();
+                    expandedAny = true;
                 }
             });
 
-            // Wait a bit for content to load
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // Get current reviews
-            const currentReviews = scrapeReviewsFromPage();
-            totalReviews = [...new Set([...totalReviews, ...currentReviews])];
+            if (expandedAny) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
 
             // Try to load more reviews
             let loadMoreFound = false;
             for (const selector of AMAZON_LOAD_MORE_SELECTORS) {
                 const loadMoreBtn = document.querySelector(selector);
-                if (loadMoreBtn && loadMoreBtn.offsetParent !== null) {
+                if (loadMoreBtn && loadMoreBtn.offsetParent !== null && !loadMoreBtn.classList.contains('clicked')) {
                     console.log(`Clicking load more button: ${selector}`);
+                    loadMoreBtn.classList.add('clicked'); // Prevent multiple clicks
                     loadMoreBtn.click();
                     loadMoreFound = true;
                     break;
@@ -63,14 +66,25 @@ function expandAndLoadMoreReviews(maxAttempts = 3) {
             }
 
             if (!loadMoreFound) {
-                console.log('No more load buttons found, stopping');
+                console.log('No more load buttons found');
                 break;
             }
 
-            // Wait for new reviews to load
+            // Wait for new content to load
             await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Check if we got new reviews
+            const currentReviews = scrapeReviewsFromPage();
+            if (currentReviews.length > totalReviews.length) {
+                totalReviews = currentReviews;
+                console.log(`Now have ${totalReviews.length} reviews (+${totalReviews.length - initialCount})`);
+            } else {
+                console.log('No new reviews found in this attempt');
+                break;
+            }
         }
 
+        console.log(`Expansion complete: ${initialCount} → ${totalReviews.length} reviews`);
         resolve(totalReviews);
     });
 }
@@ -116,22 +130,32 @@ function waitForReviews(timeout = 20000) {
     return new Promise(async (resolve) => {
         console.log('Starting enhanced review collection...');
 
-        // First, try to expand and load more reviews
-        const expandedReviews = await expandAndLoadMoreReviews();
+        // First, get initial reviews
+        let allReviews = scrapeReviewsFromPage();
+        console.log(`Initial scrape found ${allReviews.length} reviews`);
 
-        if (expandedReviews.length > 0) {
-            console.log(`Collected ${expandedReviews.length} reviews after expansion`);
-            return resolve(expandedReviews);
+        // If we have some reviews, try to expand and get more
+        if (allReviews.length > 0) {
+            try {
+                const expandedReviews = await expandAndLoadMoreReviews();
+                if (expandedReviews.length > allReviews.length) {
+                    console.log(`Expansion increased reviews from ${allReviews.length} to ${expandedReviews.length}`);
+                    allReviews = expandedReviews;
+                }
+            } catch (error) {
+                console.log('Expansion failed, using initial reviews:', error);
+            }
+            
+            return resolve(allReviews);
         }
 
-        // Fallback to original method if expansion didn't work
-        let allReviews = scrapeReviewsFromPage();
-        if (allReviews.length > 0) return resolve(allReviews);
-
+        // If no initial reviews found, wait and observe for dynamic loading
+        console.log('No initial reviews found, waiting for dynamic content...');
         const observer = new MutationObserver(() => {
             const newReviews = scrapeReviewsFromPage();
             if (newReviews.length > allReviews.length) {
                 allReviews = newReviews;
+                console.log(`Found ${newReviews.length} reviews via observer`);
             }
         });
 

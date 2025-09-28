@@ -240,7 +240,7 @@ body {
 /* Purchase Confidence Card */
 .analytics-card.confidence {
     border-color: #FF9800;
-    background: linear-gradient(135deg, #FFF8E1 0%, #FFFFFF 100%);
+    background: #FFF8E1;
 }
 
 .confidence-meter {
@@ -254,7 +254,7 @@ body {
 
 .confidence-fill {
     height: 100%;
-    background: linear-gradient(90deg, #FF5722 0%, #FF9800 50%, #4CAF50 100%);
+    background-color: #4CAF50;
     border-radius: 12px;
     transition: width 0.8s ease-in-out;
     width: 0%;
@@ -281,7 +281,7 @@ body {
 /* Authenticity Card */
 .analytics-card.authenticity {
     border-color: #9C27B0;
-    background: linear-gradient(135deg, #F3E5F5 0%, #FFFFFF 100%);
+    background: #F3E5F5;
 }
 
 .authenticity-display {
@@ -339,7 +339,7 @@ body {
 /* Comparison Card */
 .analytics-card.comparison {
     border-color: #E91E63;
-    background: linear-gradient(135deg, #FCE4EC 0%, #FFFFFF 100%);
+    background: #FCE4EC;
 }
 
 .comparison-grid {
@@ -393,7 +393,7 @@ body {
 /* Enhanced Categories Card */
 .analytics-card.categories {
     border-color: #2196F3;
-    background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
+    background: #E3F2FD;
 }
 
 /* Mobile Responsiveness */
@@ -401,7 +401,8 @@ body {
 
 /* Review Velocity Analysis */
 .velocity {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #E8EAF6;
+    border-color: #3F51B5;
 }
 
 .velocity-container {
@@ -430,29 +431,30 @@ body {
 
 .velocity-indicator.low::before {
     width: 30%;
-    background: linear-gradient(90deg, #FFA726, #FF8F00);
+    background-color: #FF9800;
 }
 
 .velocity-indicator.moderate::before {
     width: 60%;
-    background: linear-gradient(90deg, #42A5F5, #1E88E5);
+    background-color: #2196F3;
 }
 
 .velocity-indicator.high::before {
     width: 90%;
-    background: linear-gradient(90deg, #66BB6A, #43A047);
+    background-color: #4CAF50;
 }
 
 .velocity-text {
     font-size: 14px;
-    color: white;
+    color: var(--text-dark);
     font-weight: 500;
     text-align: center;
 }
 
 /* Price-Value Analysis */
 .value-analysis {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: #FFF3E0;
+    border-color: #FF9800;
 }
 
 .value-container {
@@ -466,7 +468,7 @@ body {
 }
 
 .value-bar-bg {
-    background: rgba(255, 255, 255, 0.3);
+    background: #E0E0E0;
     height: 12px;
     border-radius: 6px;
     overflow: hidden;
@@ -474,7 +476,7 @@ body {
 
 .value-bar {
     height: 100%;
-    background: linear-gradient(90deg, #ffffff, #f0f0f0);
+    background-color: #FF9800;
     border-radius: 6px;
     transition: width 1s ease;
     position: relative;
@@ -487,27 +489,28 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background: rgba(255,255,255,0.4);
     animation: shimmer 2s infinite;
 }
 
 .value-text {
     font-size: 16px;
-    color: white;
+    color: var(--text-dark);
     font-weight: 600;
     text-align: center;
 }
 
 .value-reason {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-light);
     text-align: center;
     font-style: italic;
 }
 
 /* Competitor Hints */
 .competitor-hints {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: #E0F7FA;
+    border-color: #00BCD4;
 }
 
 .hints-container {
@@ -518,11 +521,11 @@ body {
 
 .hint-item {
     font-size: 13px;
-    color: white;
-    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-dark);
+    background: rgba(255, 255, 255, 0.8);
     padding: 8px 12px;
     border-radius: 8px;
-    border-left: 3px solid rgba(255, 255, 255, 0.8);
+    border-left: 3px solid #00BCD4;
     line-height: 1.4;
 }
 
