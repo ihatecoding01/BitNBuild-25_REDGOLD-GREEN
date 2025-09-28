@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCategoryBreakdown(data);
             renderReviewVelocityAnalysis(data);
             renderPriceValueInsights(data);
-            renderCompetitorHints(data);
             renderChart(data.sentiment);
         } else if (state === 'error' && data) {
             if (errorMessageEl) errorMessageEl.textContent = data.message || 'An unknown error occurred.';
@@ -193,19 +192,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (lengthIndicator) {
             const lengthScore = authMetrics.avg_review_length || 50;
-            lengthIndicator.className = 'indicator ' + 
+            lengthIndicator.className = 'indicator ' +
                 (lengthScore > 80 ? 'high' : lengthScore > 40 ? 'medium' : 'low');
         }
 
         if (emotionIndicator) {
             const emotionBalance = 1 - (authMetrics.sentiment_variance || 0);
-            emotionIndicator.className = 'indicator ' + 
+            emotionIndicator.className = 'indicator ' +
                 (emotionBalance > 0.7 ? 'high' : emotionBalance > 0.4 ? 'medium' : 'low');
         }
 
         if (specificIndicator) {
             const specificityScore = authMetrics.category_coverage || 0;
-            specificIndicator.className = 'indicator ' + 
+            specificIndicator.className = 'indicator ' +
                 (specificityScore >= 4 ? 'high' : specificityScore >= 2 ? 'medium' : 'low');
         }
     };
@@ -442,19 +441,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- NEW UNIQUE ANALYTICS FUNCTIONS ---
-    
+
     const renderReviewVelocityAnalysis = (data) => {
         const nReviews = data.n_reviews || 0;
         const velocityEl = document.getElementById('velocity-indicator');
         const velocityTextEl = document.getElementById('velocity-text');
-        
+
         if (!velocityEl || !velocityTextEl) return;
-        
+
         // Simulate review velocity analysis (in real app, this would come from backend)
         let velocityScore = 'moderate';
         let velocityText = 'Steady review flow';
         let velocityClass = 'moderate';
-        
+
         if (nReviews > 100) {
             velocityScore = 'high';
             velocityText = 'High review activity - Popular product';
@@ -464,29 +463,29 @@ document.addEventListener('DOMContentLoaded', () => {
             velocityText = 'Limited reviews - New or niche product';
             velocityClass = 'low';
         }
-        
+
         velocityEl.className = `velocity-indicator ${velocityClass}`;
         velocityTextEl.textContent = velocityText;
     };
-    
+
     const renderPriceValueInsights = (data) => {
         const valueEl = document.getElementById('value-score');
         const valueTextEl = document.getElementById('value-insight');
         const valueReasonEl = document.getElementById('value-reason');
-        
+
         if (!valueEl || !valueTextEl || !valueReasonEl) return;
-        
+
         const sentimentData = data.sentiment || {};
         const positiveRatio = sentimentData.positive || 0;
         const negativeRatio = sentimentData.negative || 0;
-        
+
         // Calculate value score (advanced algorithm in real implementation)
         const valueScore = Math.round(60 + (positiveRatio * 30) - (negativeRatio * 20));
         const clampedValue = Math.max(10, Math.min(100, valueScore));
-        
+
         let valueText = 'Fair Value';
         let valueReason = 'Price matches quality expectations';
-        
+
         if (clampedValue >= 80) {
             valueText = 'Excellent Value';
             valueReason = 'High quality product for the price point';
@@ -497,46 +496,19 @@ document.addEventListener('DOMContentLoaded', () => {
             valueText = 'Poor Value';
             valueReason = 'Quality concerns relative to price';
         }
-        
-        valueEl.style.width = `${clampedValue}%`;
+
+        // Animate the progress bar with proper timing
+        valueEl.style.width = '0%';
+
+        // Use requestAnimationFrame for smooth animation
+        setTimeout(() => {
+            valueEl.style.width = `${clampedValue}%`;
+        }, 100);
+
         valueTextEl.textContent = `${clampedValue}% - ${valueText}`;
         valueReasonEl.textContent = valueReason;
     };
-    
-    const renderCompetitorHints = (data) => {
-        const hintsEl = document.getElementById('competitor-hints');
-        if (!hintsEl) return;
-        
-        const sentimentData = data.sentiment || {};
-        const negativeRatio = sentimentData.negative || 0;
-        const topNegative = data.top_negative || [];
-        
-        const hints = [];
-        
-        // Generate smart competitor hints based on negative feedback
-        if (negativeRatio > 0.3) {
-            hints.push('Consider checking competitor products for better alternatives');
-        }
-        
-        if (topNegative.some(item => item.term.includes('battery'))) {
-            hints.push('Look for products with better battery life ratings');
-        }
-        
-        if (topNegative.some(item => item.term.includes('quality') || item.term.includes('build'))) {
-            hints.push('Check premium alternatives with higher build quality');
-        }
-        
-        if (topNegative.some(item => item.term.includes('service') || item.term.includes('support'))) {
-            hints.push('Consider brands known for better customer support');
-        }
-        
-        if (hints.length === 0) {
-            hints.push('This product compares well against competitors');
-        }
-        
-        hintsEl.innerHTML = hints.map(hint => `<div class="hint-item">• ${hint}</div>`).join('');
-    };
-    
+
     // --- End New Analytics Functions ---
 
     // --- Start Analysis ---

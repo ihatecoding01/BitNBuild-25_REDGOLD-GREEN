@@ -6,8 +6,7 @@ const AMAZON_REVIEW_TEXT_SELECTORS = [
     'span[data-hook="review-body"] span:not([class])',
     'div[data-hook="review-body"] span:not([class])',
     '.cr-original-review-text',
-    '[data-hook="review-body"] > span',
-    'span[data-hook="review-body"]'
+    '[data-hook="review-body"] > span'
 ];
 
 const FLIPKART_REVIEW_TEXT_SELECTORS = [
@@ -56,41 +55,31 @@ function scrapeReviewsFromPage() {
 function safeExpandReviews() {
     return new Promise(async (resolve) => {
         console.log('Expanding truncated reviews...');
-        let expandedCount = 0;
+        let expandedAny = false;
 
-        try {
-            // Only expand "Read more" links within existing reviews - no navigation
-            const readMoreButtons = document.querySelectorAll('[data-hook="expand-collapse-content"]');
-            readMoreButtons.forEach(button => {
-                if (button.innerText?.includes('Read more') && !button.dataset.revuzeExpanded) {
-                    try {
-                        button.dataset.revuzeExpanded = 'true';
-                        button.click();
-                        expandedCount++;
-                    } catch (e) {
-                        console.log('Failed to expand review:', e);
-                    }
-                }
-            });
-
-            if (expandedCount > 0) {
-                console.log(`Expanded ${expandedCount} reviews, waiting for content...`);
-                await new Promise(resolve => setTimeout(resolve, 1500));
+        // Only expand "Read more" links within existing reviews
+        const readMoreButtons = document.querySelectorAll('[data-hook="expand-collapse-content"]');
+        readMoreButtons.forEach(button => {
+            if (button.innerText.includes('Read more') && !button.classList.contains('revuze-expanded')) {
+                button.classList.add('revuze-expanded');
+                button.click();
+                expandedAny = true;
             }
-        } catch (error) {
-            console.error('Error during expansion:', error);
+        });
+
+        if (expandedAny) {
+            console.log('Expanded some reviews, waiting for content...');
+            await new Promise(resolve => setTimeout(resolve, 1000));
         }
 
-        const expandedReviews = scrapeReviewsFromPage();
-        console.log(`After expansion: ${expandedReviews.length} total reviews`);
-        resolve(expandedReviews);
+        resolve(scrapeReviewsFromPage());
     });
 }
 
 // --- Main review collection function ---
-function collectReviews() {
+function collectReviews(timeout = 10000) {
     return new Promise(async (resolve) => {
-        console.log('Starting comprehensive review collection...');
+        console.log('Starting review collection...');
 
         try {
             // Step 1: Get initial reviews
@@ -106,40 +95,18 @@ function collectReviews() {
                 }
             }
 
-            // Step 3: If still no reviews, wait for dynamic content
+            // Step 3: If still no reviews, wait a bit and try again (for dynamic content)
             if (reviews.length === 0) {
                 console.log('No reviews found initially, waiting for dynamic content...');
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await new Promise(resolve => setTimeout(resolve, 2000));
                 reviews = scrapeReviewsFromPage();
-                console.log(`After waiting: ${reviews.length} reviews`);
             }
 
-            // Step 4: Final attempt with broader selectors if still empty
-            if (reviews.length === 0) {
-                console.log('Trying broader selectors...');
-                const broadSelectors = [
-                    '[data-hook="review-body"]',
-                    '.review-text',
-                    '.review-item-content',
-                    '[data-testid="review-text"]'
-                ];
-
-                for (const selector of broadSelectors) {
-                    const elements = document.querySelectorAll(selector);
-                    elements.forEach(el => {
-                        const text = el.innerText?.trim();
-                        if (text && text.length > 20 && !reviews.includes(text)) {
-                            reviews.push(text);
-                        }
-                    });
-                }
-            }
-
-            console.log(`Final collection complete: ${reviews.length} reviews`);
+            console.log(`Final collection: ${reviews.length} reviews`);
             resolve(reviews);
 
         } catch (error) {
-            console.error('Error in collectReviews:', error);
+            console.error('Error collecting reviews:', error);
             resolve([]); // Return empty array on error
         }
     });
@@ -148,9 +115,8 @@ function collectReviews() {
 // --- Message listener ---
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "scrapeReviews") {
-        console.log('Received scrapeReviews request');
         collectReviews().then(reviews => {
-            console.log(`Content script returning ${reviews.length} reviews to popup`);
+            console.log("Content script scraped reviews:", reviews.length);
             sendResponse({ reviews });
         }).catch(err => {
             console.error("Scraping failed:", err);
