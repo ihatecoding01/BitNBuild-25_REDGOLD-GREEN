@@ -190,5 +190,5 @@ if __name__ == "__main__":
     
     # To see the browser, change headless=True to headless=False
     reviews = asyncio.run(scrape_reviews(test_url, max_reviews=25, headless=False))
-    print(f"\n✅ FINAL RESULT: Scraped {len(reviews)} reviews.")
+    print(f"\nFINAL RESULT: Scraped {len(reviews)} reviews.")
 

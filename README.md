@@ -1,4 +1,4 @@
-# Revuze - AI-Powered Amazon Review Analysis Extension 🚀
+# Revuze - AI-Powered Amazon Review Analysis Extension
 
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-red?logo=googlechrome)](chrome://extensions/)
 [![AI Powered](https://img.shields.io/badge/AI-Powered-blue?logo=openai)](https://huggingface.co/)
@@ -8,13 +8,13 @@
 
 **Unlike Amazon's basic AI review stats, Revuze provides:**
 
-- 🎯 **Purchase Confidence Score** - ML-powered algorithm to predict buying confidence (0-100%)
-- 🔍 **Authenticity Analysis** - Advanced trust indicators to detect fake reviews  
-- ❤️ **Love vs Hate Comparison** - Side-by-side emotional analysis breakdown
-- 📊 **Smart Category Insights** - Aspect-based sentiment analysis with visual metrics
-- 🎨 **Premium Visual Interface** - Professional gradient UI with animated components
+- **Purchase Confidence Score** - ML-powered algorithm to predict buying confidence (0-100%)
+- **Authenticity Analysis** - Advanced trust indicators to detect fake reviews  
+- **Love vs Hate Comparison** - Side-by-side emotional analysis breakdown
+- **Smart Category Insights** - Aspect-based sentiment analysis with visual metrics
+- **Premium Visual Interface** - Professional gradient UI with animated components
 
-## 🏗️ Architecture
+## Architecture
 
 ### Frontend (Chrome Extension)
 - **Manifest V3** extension with modern APIs
@@ -28,7 +28,7 @@
 - **Advanced NLP Pipeline**: TF-IDF keyword extraction + aspect-based analysis
 - **ML Algorithms**: Authenticity scoring using scikit-learn
 
-## 🚀 Installation
+## Installation
 
 ### 1. Backend Setup
 ```bash
@@ -53,18 +53,18 @@ python main.py
    - Love vs hate comparison
    - Category breakdown charts
 
-## 🎯 What Makes Us Different
+## What Makes Us Different
 
 | Feature | Amazon AI | Revuze AI |
 |---------|-----------|-----------|
-| Purchase Confidence | ❌ | ✅ ML-powered 0-100% score |
-| Authenticity Detection | ❌ | ✅ Advanced trust algorithms |
-| Emotional Analysis | Basic | ✅ Love vs Hate comparison |
-| Visual Interface | Basic | ✅ Premium gradient design |
-| Aspect Analysis | Limited | ✅ Detailed category insights |
-| Real-time Processing | ❌ | ✅ Async job polling |
+| Purchase Confidence | No | ML-powered 0-100% score |
+| Authenticity Detection | No | Advanced trust algorithms |
+| Emotional Analysis | Basic | Love vs Hate comparison |
+| Visual Interface | Basic | Premium gradient design |
+| Aspect Analysis | Limited | Detailed category insights |
+| Real-time Processing | No | Async job polling |
 
-## 🔧 Technical Stack
+## Technical Stack
 
 **AI & ML:**
 - HuggingFace Transformers (BART, RoBERTa models)
@@ -84,7 +84,7 @@ python main.py
 - Responsive CSS with animations
 - Modern JavaScript async/await patterns
 
-## 📊 Analytics Dashboard
+## Analytics Dashboard
 
 ### Purchase Confidence Meter
 Advanced ML algorithm analyzes review patterns, language sentiment, and product-specific indicators to generate a confidence score for purchase decisions.
@@ -103,7 +103,7 @@ Emotional comparison grid showing:
 - Visual comparison charts
 - Emotional intensity metrics
 
-## 🎨 UI Screenshots
+## UI Screenshots
 
 The extension features a beautiful gradient interface with:
 - Professional card-based layout
@@ -112,7 +112,7 @@ The extension features a beautiful gradient interface with:
 - Interactive comparison charts
 - Mobile-responsive design
 
-## 🤖 Advanced NLP Features
+## Advanced NLP Features
 
 - **Zero-shot Classification**: Categorizes reviews without training data
 - **Aspect-based Sentiment**: Analyzes sentiment for specific product aspects
@@ -120,7 +120,7 @@ The extension features a beautiful gradient interface with:
 - **Authenticity Detection**: ML-based fake review identification
 - **Confidence Scoring**: Purchase decision confidence algorithms
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - [ ] Multi-language review support
 - [ ] Historical trend analysis
@@ -128,7 +128,7 @@ The extension features a beautiful gradient interface with:
 - [ ] Export analysis reports
 - [ ] Browser-wide analytics dashboard
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -136,10 +136,10 @@ The extension features a beautiful gradient interface with:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Made with ❤️ for better shopping decisions through AI-powered review analysis**
+**Made with care for better shopping decisions through AI-powered review analysis**

@@ -1,7 +1,7 @@
 @echo off
 title Revuze Backend Server
 echo ========================================
-echo   🚀 Starting Revuze Backend Server
+echo   Starting Revuze Backend Server
 echo ========================================
 echo.
 echo Backend URL: http://localhost:8000

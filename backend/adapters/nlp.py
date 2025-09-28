@@ -5,9 +5,9 @@ from core.errors import AnalysisError
 try:
     from .sentiment_integration import analyze_reviews_advanced
     USE_ADVANCED_ANALYZER = True
-    print("✅ Advanced sentiment analyzer loaded successfully")
+    print("Advanced sentiment analyzer loaded successfully")
 except ImportError as e:
-    print(f"⚠️ Advanced analyzer not available ({e}), falling back to mock")
+    print(f"Advanced analyzer not available ({e}), falling back to mock")
     USE_ADVANCED_ANALYZER = False
     import time
     import random

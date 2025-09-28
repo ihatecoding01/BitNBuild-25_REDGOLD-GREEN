@@ -24,10 +24,10 @@ def read_root():
 
 if __name__ == "__main__":
     import uvicorn
-    print("🚀 Starting Revuze Backend Server...")
-    print("📍 Server URL: http://localhost:8000")
-    print("📚 API Docs: http://localhost:8000/docs")
-    print("🔄 Health Check: http://localhost:8000/api/v1/health")
+    print("Starting Revuze Backend Server...")
+    print("Server URL: http://localhost:8000")
+    print("API Docs: http://localhost:8000/docs")
+    print("Health Check: http://localhost:8000/api/v1/health")
     print("\nPress Ctrl+C to stop the server\n")
     
     uvicorn.run(
