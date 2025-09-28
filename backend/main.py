@@ -21,3 +21,19 @@ app.include_router(endpoints.router, prefix="/api/v1")
 @app.get("/", include_in_schema=False)
 def read_root():
     return {"message": "Welcome to Review Radar API. Send review texts to /api/v1/analyze"}
+
+if __name__ == "__main__":
+    import uvicorn
+    print("🚀 Starting Revuze Backend Server...")
+    print("📍 Server URL: http://localhost:8000")
+    print("📚 API Docs: http://localhost:8000/docs")
+    print("🔄 Health Check: http://localhost:8000/api/v1/health")
+    print("\nPress Ctrl+C to stop the server\n")
+    
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=8000,
+        reload=False,
+        log_level="info"
+    )
