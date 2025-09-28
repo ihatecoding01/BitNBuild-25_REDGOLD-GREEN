@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Revuze - Simple Test</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .button {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .button:hover {
+            background: #357ABD;
+        }
+
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .loading {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🔧 Revuze Simple Test</h2>
+
+    <button id="simple-analyze" class="button">Test Analyze Button</button>
+    <button id="test-backend" class="button">Test Backend</button>
+    <button id="test-scraping" class="button">Test Scraping</button>
+
+    <div id="status" class="status">Ready to test...</div>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const analyzeBtn = document.getElementById('simple-analyze');
+        const backendBtn = document.getElementById('test-backend');
+        const scrapingBtn = document.getElementById('test-scraping');
+
+        function setStatus(message, type = '') {
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+
+        // Test 1: Simple button click
+        analyzeBtn.addEventListener('click', () => {
+            console.log('🔧 Simple button clicked!');
+            setStatus('Button click working! ✅', 'success');
+        });
+
+        // Test 2: Backend connection  
+        backendBtn.addEventListener('click', async () => {
+            setStatus('Testing backend...', 'loading');
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/health');
+                if (response.ok) {
+                    const data = await response.json();
+                    setStatus(`Backend OK: ${JSON.stringify(data)} ✅`, 'success');
+                } else {
+                    setStatus(`Backend error: ${response.status} ❌`, 'error');
+                }
+            } catch (error) {
+                setStatus(`Backend failed: ${error.message} ❌`, 'error');
+            }
+        });
+
+        // Test 3: Scraping mechanism
+        scrapingBtn.addEventListener('click', () => {
+            setStatus('Testing scraping...', 'loading');
+
+            chrome.runtime.sendMessage({ from: 'popup', action: 'scrapeReviews' }, (response) => {
+                if (chrome.runtime.lastError) {
+                    setStatus(`Scraping error: ${chrome.runtime.lastError.message} ❌`, 'error');
+                    return;
+                }
+
+                const reviews = response?.reviews || [];
+                setStatus(`Scraped ${reviews.length} reviews ✅`, 'success');
+
+                if (reviews.length > 0) {
+                    console.log('First review:', reviews[0]);
+                }
+            });
+        });
+
+        setStatus('Simple test loaded ✅', 'success');
+        console.log('🔧 Simple test popup loaded');
+    </script>
+</body>
+
+</html>

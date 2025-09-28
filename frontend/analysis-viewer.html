@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revuze - Detailed Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8">
+        <!-- Loading State -->
+        <div id="loading" class="flex items-center justify-center min-h-screen">
+            <div class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Loading analysis data...</p>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="hidden flex items-center justify-center min-h-screen">
+            <div class="text-center">
+                <div class="h-12 w-12 text-red-500 mx-auto mb-4">⚠️</div>
+                <h1 class="text-xl font-semibold text-gray-900 mb-2">Analysis Not Found</h1>
+                <p class="text-gray-600 mb-4" id="error-message">The analysis data could not be loaded.</p>
+                <button onclick="goBack()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                    ← Back to Extension
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="content" class="hidden">
+            <!-- Header -->
+            <div class="mb-8">
+                <div class="flex items-center gap-4 mb-4">
+                    <button onclick="goBack()"
+                        class="border border-gray-300 px-3 py-1 rounded text-sm hover:bg-gray-50">
+                        ← Back
+                    </button>
+                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">Extension Analysis</span>
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Review Analysis Results</h1>
+
+                <div class="flex items-center gap-2 text-gray-600">
+                    <span>From:</span>
+                    <a id="source-link" href="#" target="_blank" class="text-blue-600 hover:text-blue-800">
+                        Loading...
+                    </a>
+                </div>
+            </div>
+
+            <!-- Overview Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-sm font-medium text-gray-600 mb-2">Total Reviews</h3>
+                    <div id="total-reviews" class="text-2xl font-bold text-gray-900">-</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-sm font-medium text-gray-600 mb-2">Overall Score</h3>
+                    <div class="flex items-center gap-2">
+                        <div id="overall-score" class="text-2xl font-bold text-gray-900">-%</div>
+                        <span id="trend-icon">📈</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-sm font-medium text-gray-600 mb-2">Positive</h3>
+                    <div id="positive-percent" class="text-2xl font-bold text-green-600">-%</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-sm font-medium text-gray-600 mb-2">Negative</h3>
+                    <div id="negative-percent" class="text-2xl font-bold text-red-600">-%</div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Sentiment Breakdown -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4">Sentiment Breakdown</h3>
+                    <div class="space-y-4" id="sentiment-bars">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Analysis Summary -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4">Analysis Summary</h3>
+                    <div class="text-center">
+                        <div id="summary-score" class="text-4xl font-bold text-gray-900 mb-2">-%</div>
+                        <div class="text-gray-600 mb-4">Overall Satisfaction Score</div>
+                        <div id="star-rating" class="flex justify-center">
+                            <!-- Stars will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keywords Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Positive Keywords -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        📈 Most Praised Aspects
+                    </h3>
+                    <div id="positive-keywords" class="flex flex-wrap gap-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Negative Keywords -->
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        📉 Common Complaints
+                    </h3>
+                    <div id="negative-keywords" class="flex flex-wrap gap-2">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-12 text-center text-gray-500 text-sm">
+                <p id="footer-text">Analysis generated by Revuze Extension</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.close();
+        }
+
+        function renderSentimentBar(label, percentage, color) {
+            return `
+                <div class="flex justify-between items-center">
+                    <span class="font-medium" style="color: ${color}">${label}</span>
+                    <span class="font-bold" style="color: ${color}">${percentage}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="h-2 rounded-full progress-bar" style="width: ${percentage}%; background-color: ${color}"></div>
+                </div>
+            `;
+        }
+
+        function renderKeyword(keyword, isPositive) {
+            const bgColor = isPositive ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700';
+            const term = typeof keyword === 'string' ? keyword : keyword.term || keyword;
+            const count = keyword.count ? ` (${keyword.count})` : '';
+
+            return `<span class="px-2 py-1 rounded text-sm ${bgColor}">${term}${count}</span>`;
+        }
+
+        function renderStarRating(score) {
+            const stars = Math.round(score / 20);
+            let starsHtml = '';
+
+            for (let i = 0; i < 5; i++) {
+                if (i < stars) {
+                    starsHtml += '<span class="text-yellow-400 text-xl">★</span>';
+                } else {
+                    starsHtml += '<span class="text-gray-300 text-xl">☆</span>';
+                }
+            }
+
+            return starsHtml;
+        }
+
+        function loadAnalysisData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const analysisId = urlParams.get('analysis');
+
+            if (!analysisId) {
+                showError('No analysis ID provided');
+                return;
+            }
+
+            try {
+                const storedData = localStorage.getItem(`revuze_${analysisId}`);
+                if (!storedData) {
+                    showError('Analysis data not found');
+                    return;
+                }
+
+                const data = JSON.parse(storedData);
+                renderAnalysis(data);
+            } catch (error) {
+                showError('Failed to load analysis data');
+                console.error(error);
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+            document.getElementById('error-message').textContent = message;
+        }
+
+        function renderAnalysis(data) {
+            const { sentiment, page_info, n_reviews, top_positive, top_negative } = data;
+
+            // Calculate overall score
+            const overallScore = Math.round(
+                ((sentiment?.positive || 0) * 100 + (sentiment?.neutral || 0) * 50) /
+                ((sentiment?.positive || 0) + (sentiment?.neutral || 0) + (sentiment?.negative || 0)) || 50
+            );
+
+            // Update header
+            if (page_info) {
+                document.getElementById('source-link').href = page_info.url;
+                document.getElementById('source-link').textContent = page_info.title || page_info.url;
+            }
+
+            // Update overview cards
+            document.getElementById('total-reviews').textContent = n_reviews || 0;
+            document.getElementById('overall-score').textContent = overallScore + '%';
+            document.getElementById('positive-percent').textContent = Math.round((sentiment?.positive || 0) * 100) + '%';
+            document.getElementById('negative-percent').textContent = Math.round((sentiment?.negative || 0) * 100) + '%';
+
+            // Update trend icon
+            document.getElementById('trend-icon').textContent = overallScore >= 70 ? '📈' : '📉';
+
+            // Render sentiment bars
+            const sentimentBarsHtml = [
+                renderSentimentBar('Positive', Math.round((sentiment?.positive || 0) * 100), '#10B981'),
+                renderSentimentBar('Neutral', Math.round((sentiment?.neutral || 0) * 100), '#6B7280'),
+                renderSentimentBar('Negative', Math.round((sentiment?.negative || 0) * 100), '#EF4444')
+            ].join('');
+
+            document.getElementById('sentiment-bars').innerHTML = sentimentBarsHtml;
+
+            // Update summary
+            document.getElementById('summary-score').textContent = overallScore + '%';
+            document.getElementById('star-rating').innerHTML = renderStarRating(overallScore);
+
+            // Render keywords
+            if (top_positive && top_positive.length > 0) {
+                const positiveHtml = top_positive.slice(0, 8).map(kw => renderKeyword(kw, true)).join('');
+                document.getElementById('positive-keywords').innerHTML = positiveHtml;
+            }
+
+            if (top_negative && top_negative.length > 0) {
+                const negativeHtml = top_negative.slice(0, 8).map(kw => renderKeyword(kw, false)).join('');
+                document.getElementById('negative-keywords').innerHTML = negativeHtml;
+            }
+
+            // Update footer
+            if (page_info?.timestamp) {
+                document.getElementById('footer-text').textContent =
+                    `Analysis generated by Revuze Extension • ${new Date(page_info.timestamp).toLocaleString()}`;
+            }
+
+            // Show content
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('content').classList.remove('hidden');
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadAnalysisData);
+    </script>
+</body>
+
+</html>

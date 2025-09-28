@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Revuze Debug</title>
+    <style>
+        body {
+            width: 400px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #357ABD;
+        }
+
+        .log {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🔧 Revuze Debug Panel</h2>
+
+    <button id="test-backend">Test Backend Connection</button>
+    <button id="test-scraping">Test Review Scraping</button>
+    <button id="test-full-flow">Test Full Analysis Flow</button>
+    <button id="clear-log">Clear Log</button>
+
+    <div id="log" class="log">Debug log will appear here...</div>
+
+    <script>
+        const log = document.getElementById('log');
+        const API_BASE_URL = 'http://localhost:8000/api/v1';
+
+        function debugLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            log.textContent += `[${timestamp}] ${message}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        document.getElementById('clear-log').addEventListener('click', () => {
+            log.textContent = 'Log cleared...\n';
+        });
+
+        document.getElementById('test-backend').addEventListener('click', async () => {
+            debugLog('🔧 Testing backend connection...');
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                debugLog(`✅ Backend response: ${response.status}`);
+                const data = await response.json();
+                debugLog(`📊 Data: ${JSON.stringify(data)}`);
+            } catch (error) {
+                debugLog(`❌ Backend error: ${error.message}`);
+            }
+        });
+
+        document.getElementById('test-scraping').addEventListener('click', () => {
+            debugLog('🔧 Testing review scraping...');
+            chrome.runtime.sendMessage({ from: 'popup', action: 'scrapeReviews' }, (response) => {
+                if (chrome.runtime.lastError) {
+                    debugLog(`❌ Scraping error: ${chrome.runtime.lastError.message}`);
+                    return;
+                }
+                const reviews = response?.reviews || [];
+                debugLog(`✅ Scraped ${reviews.length} reviews`);
+                if (reviews.length > 0) {
+                    debugLog(`📝 First review: ${reviews[0].substring(0, 100)}...`);
+                }
+                if (response.error) {
+                    debugLog(`⚠️ Scraping warning: ${response.error}`);
+                }
+            });
+        });
+
+        document.getElementById('test-full-flow').addEventListener('click', async () => {
+            debugLog('🔧 Testing full analysis flow...');
+
+            // Step 1: Test scraping
+            chrome.runtime.sendMessage({ from: 'popup', action: 'scrapeReviews' }, async (response) => {
+                if (chrome.runtime.lastError) {
+                    debugLog(`❌ Step 1 failed: ${chrome.runtime.lastError.message}`);
+                    return;
+                }
+
+                const reviews = response?.reviews || [];
+                debugLog(`✅ Step 1: Scraped ${reviews.length} reviews`);
+
+                if (reviews.length === 0) {
+                    debugLog('❌ No reviews to analyze');
+                    return;
+                }
+
+                // Step 2: Test backend submission
+                try {
+                    debugLog('🔧 Step 2: Submitting to backend...');
+                    const submitResponse = await fetch(`${API_BASE_URL}/analyze`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ reviews: reviews.slice(0, 5) }) // Only first 5 for testing
+                    });
+
+                    debugLog(`📊 Submit response: ${submitResponse.status}`);
+
+                    if (!submitResponse.ok) {
+                        debugLog(`❌ Submit failed: ${submitResponse.status}`);
+                        return;
+                    }
+
+                    const submitData = await submitResponse.json();
+                    debugLog(`✅ Job submitted: ${submitData.job_id}`);
+
+                    // Step 3: Poll for results (simplified)
+                    debugLog('🔧 Step 3: Polling for results...');
+                    setTimeout(async () => {
+                        try {
+                            const resultResponse = await fetch(`${API_BASE_URL}/results/${submitData.job_id}`);
+                            debugLog(`📊 Result response: ${resultResponse.status}`);
+
+                            if (resultResponse.ok) {
+                                const resultData = await resultResponse.json();
+                                debugLog(`✅ Analysis complete!`);
+                                debugLog(`📈 Sentiment: P:${Math.round((resultData.sentiment?.positive || 0) * 100)}% N:${Math.round((resultData.sentiment?.negative || 0) * 100)}%`);
+                            } else {
+                                debugLog(`⏳ Still processing... (${resultResponse.status})`);
+                            }
+                        } catch (error) {
+                            debugLog(`❌ Result polling error: ${error.message}`);
+                        }
+                    }, 3000);
+
+                } catch (error) {
+                    debugLog(`❌ Step 2 failed: ${error.message}`);
+                }
+            });
+        });
+
+        debugLog('🔧 Debug panel loaded');
+    </script>
+</body>
+
+</html>

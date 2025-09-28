@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revuze Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .loading {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Revuze Integration Test</h1>
+        <p>This page tests the complete integration flow: Frontend → Backend → Extension Dashboard</p>
+
+        <div id="status" class="status loading">
+            📋 Ready to test integration...
+        </div>
+
+        <h3>Step 1: Test Backend Health</h3>
+        <button onclick="testBackendHealth()" id="health-btn">Test Backend Health</button>
+        <div id="health-status"></div>
+
+        <h3>Step 2: Test Analysis API</h3>
+        <button onclick="testAnalysis()" id="analysis-btn">Test Sample Analysis</button>
+        <div id="analysis-status"></div>
+
+        <h3>Step 3: Test Frontend Dashboard</h3>
+        <button onclick="testDashboard()" id="dashboard-btn">Open Test Dashboard</button>
+        <div id="dashboard-status"></div>
+
+        <h3>Test Data (Sample Reviews)</h3>
+        <textarea id="test-reviews" readonly>
+Great product! Really love the quality and fast delivery.
+Average quality, nothing special but does the job.
+Terrible experience, product broke after one day.
+Excellent value for money, highly recommend!
+Not worth the price, found better alternatives.
+        </textarea>
+
+        <h3>Results Log</h3>
+        <div id="results-log"
+            style="background: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; white-space: pre-wrap; min-height: 100px;">
+        </div>
+
+        <hr>
+        <h3>Manual Extension Test</h3>
+        <p>To test the complete extension integration:</p>
+        <ol>
+            <li>Make sure the backend is running (test above ↑)</li>
+            <li>Install the extension in Chrome</li>
+            <li>Go to an Amazon or Flipkart product page</li>
+            <li>Click the Revuze extension icon</li>
+            <li>Click "Analyze Reviews"</li>
+            <li>Wait for analysis to complete</li>
+            <li>Click "View Detailed Analysis" to see the dashboard</li>
+        </ol>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000/api/v1';
+        let currentJobId = null;
+
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logElement = document.getElementById('results-log');
+            logElement.textContent += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function updateStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+
+        async function testBackendHealth() {
+            const btn = document.getElementById('health-btn');
+            const statusEl = document.getElementById('health-status');
+
+            btn.disabled = true;
+            statusEl.innerHTML = '<div class="status loading">Testing backend health...</div>';
+            log('Testing backend health...');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    statusEl.innerHTML = '<div class="status success">✅ Backend is healthy!</div>';
+                    log(`Backend health check passed: ${JSON.stringify(data)}`);
+                    updateStatus('✅ Backend connection successful', 'success');
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusEl.innerHTML = '<div class="status error">❌ Backend connection failed</div>';
+                log(`Backend health check failed: ${error.message}`);
+                updateStatus('❌ Backend connection failed', 'error');
+            }
+
+            btn.disabled = false;
+        }
+
+        async function testAnalysis() {
+            const btn = document.getElementById('analysis-btn');
+            const statusEl = document.getElementById('analysis-status');
+
+            btn.disabled = true;
+            statusEl.innerHTML = '<div class="status loading">Testing analysis API...</div>';
+            log('Testing analysis with sample reviews...');
+
+            try {
+                // Get test reviews
+                const reviewsText = document.getElementById('test-reviews').value;
+                const reviews = reviewsText.split('\n').filter(r => r.trim());
+
+                // Submit analysis
+                const response = await fetch(`${API_BASE_URL}/analyze`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reviews })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Analysis submission failed: ${response.status}`);
+                }
+
+                const submitData = await response.json();
+                currentJobId = submitData.job_id;
+                log(`Analysis submitted with job ID: ${currentJobId}`);
+
+                // Poll for results
+                statusEl.innerHTML = '<div class="status loading">⏳ Processing analysis...</div>';
+                const result = await pollForResults(currentJobId);
+
+                statusEl.innerHTML = '<div class="status success">✅ Analysis completed successfully!</div>';
+                log(`Analysis completed: ${JSON.stringify(result, null, 2)}`);
+                updateStatus('✅ Analysis API working correctly', 'success');
+
+            } catch (error) {
+                statusEl.innerHTML = '<div class="status error">❌ Analysis failed</div>';
+                log(`Analysis failed: ${error.message}`);
+                updateStatus('❌ Analysis API failed', 'error');
+            }
+
+            btn.disabled = false;
+        }
+
+        async function pollForResults(jobId, maxAttempts = 30) {
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/results/${jobId}`);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        log(`Results retrieved on attempt ${attempt}`);
+                        return data;
+                    } else if (response.status === 202) {
+                        log(`Attempt ${attempt}: Still processing...`);
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                    } else {
+                        throw new Error(`Results polling failed: ${response.status}`);
+                    }
+                } catch (error) {
+                    if (attempt === maxAttempts) throw error;
+                    log(`Attempt ${attempt} failed: ${error.message}`);
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                }
+            }
+            throw new Error('Analysis timed out');
+        }
+
+        async function testDashboard() {
+            const btn = document.getElementById('dashboard-btn');
+            const statusEl = document.getElementById('dashboard-status');
+
+            if (!currentJobId) {
+                statusEl.innerHTML = '<div class="status error">❌ Run analysis test first</div>';
+                return;
+            }
+
+            btn.disabled = true;
+            statusEl.innerHTML = '<div class="status loading">Creating test dashboard...</div>';
+            log('Creating dashboard with test data...');
+
+            try {
+                // Create mock extension data
+                const testData = {
+                    sentiment: { positive: 0.6, neutral: 0.2, negative: 0.2 },
+                    n_reviews: 5,
+                    top_positive: ['quality', 'fast delivery', 'excellent', 'recommend'],
+                    top_negative: ['expensive', 'broke', 'poor quality'],
+                    page_info: {
+                        url: 'https://example.com/test-product',
+                        title: 'Test Product Page',
+                        timestamp: new Date().toISOString()
+                    },
+                    job_id: currentJobId,
+                    source: 'integration_test'
+                };
+
+                // Store in localStorage
+                const analysisId = `test_${Date.now()}`;
+                localStorage.setItem(`revuze_${analysisId}`, JSON.stringify(testData));
+
+                // Open dashboard
+                const dashboardUrl = `../review_extension/analysis-viewer.html?analysis=${analysisId}`;
+                window.open(dashboardUrl, '_blank');
+
+                statusEl.innerHTML = '<div class="status success">✅ Dashboard opened in new tab</div>';
+                log(`Dashboard opened with analysis ID: ${analysisId}`);
+                updateStatus('✅ Complete integration test successful!', 'success');
+
+            } catch (error) {
+                statusEl.innerHTML = '<div class="status error">❌ Dashboard test failed</div>';
+                log(`Dashboard test failed: ${error.message}`);
+                updateStatus('❌ Dashboard test failed', 'error');
+            }
+
+            btn.disabled = false;
+        }
+
+        // Auto-run health check on page load
+        window.addEventListener('load', () => {
+            setTimeout(testBackendHealth, 1000);
+        });
+    </script>
+</body>
+
+</html>

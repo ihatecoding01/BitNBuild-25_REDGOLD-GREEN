@@ -1,0 +1,52 @@
+{
+    "manifest_version": 3,
+    "name": "Revuze Debug",
+    "version": "0.2.1",
+    "description": "Debug version of Revuze extension",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "tabs"
+    ],
+    "host_permissions": [
+        "http://localhost:8000/"
+    ],
+    "action": {
+        "default_popup": "debug.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.amazon.in/*",
+                "*://*.flipkart.com/*"
+            ],
+            "js": [
+                "content_script.js"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "analysis-viewer.html"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}
