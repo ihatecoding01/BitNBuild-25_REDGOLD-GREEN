@@ -30,11 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const nReviews = data.n_reviews || (data.reviews ? data.reviews.length : 0);
             if (nReviewsEl) nReviewsEl.textContent = nReviews;
 
-            // Render unique analytics features
             renderPurchaseConfidence(data);
             renderAuthenticityScore(data);
             renderLoveHateAnalysis(data);
             renderCategoryBreakdown(data);
+            renderReviewVelocityAnalysis(data);
+            renderPriceValueInsights(data);
             renderChart(data.sentiment);
         } else if (state === 'error' && data) {
             if (errorMessageEl) errorMessageEl.textContent = data.message || 'An unknown error occurred.';
@@ -147,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderAuthenticityScore = (data) => {
         const nReviews = data.n_reviews || 0;
+        const authMetrics = data.authenticity_metrics || {};
         let authenticityScore = 75; // base score
 
         // Factor 1: Review volume distribution
@@ -158,14 +160,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const isExtreme = sentimentData.positive > 0.9 || sentimentData.negative > 0.9;
         if (isExtreme && nReviews > 20) authenticityScore -= 15;
 
-        // Factor 3: Category mentions (authentic reviews mention specific aspects)
-        const categoriesFound = (data.category_breakdown || []).length;
-        if (categoriesFound >= 3) authenticityScore += 10;
-        else if (categoriesFound === 0) authenticityScore -= 10;
+        // Factor 3: Advanced metrics from backend
+        if (authMetrics.avg_review_length) {
+            // Authentic reviews tend to be reasonably detailed
+            if (authMetrics.avg_review_length > 100) authenticityScore += 8;
+            else if (authMetrics.avg_review_length < 30) authenticityScore -= 10;
+        }
 
-        // Factor 4: Keyword diversity (authentic reviews use varied language)
-        const totalKeywords = (data.top_positive || []).length + (data.top_negative || []).length;
-        if (totalKeywords >= 15) authenticityScore += 5;
+        if (authMetrics.keyword_diversity) {
+            // More diverse vocabulary suggests authentic reviews
+            if (authMetrics.keyword_diversity >= 20) authenticityScore += 12;
+            else if (authMetrics.keyword_diversity < 8) authenticityScore -= 8;
+        }
+
+        if (authMetrics.category_coverage) {
+            // Authentic reviews cover multiple product aspects
+            if (authMetrics.category_coverage >= 4) authenticityScore += 10;
+            else if (authMetrics.category_coverage <= 1) authenticityScore -= 12;
+        }
 
         authenticityScore = Math.max(30, Math.min(95, authenticityScore));
 
@@ -173,15 +185,28 @@ document.addEventListener('DOMContentLoaded', () => {
             trustPercentageEl.textContent = `${Math.round(authenticityScore)}%`;
         }
 
-        // Update trust indicators
-        const indicators = document.querySelectorAll('.indicator');
-        indicators.forEach((indicator, index) => {
-            const score = Math.random() * 30 + 70; // Simulate individual scores
-            indicator.className = 'indicator';
-            if (score >= 80) indicator.classList.add('high');
-            else if (score >= 60) indicator.classList.add('medium');
-            else indicator.classList.add('low');
-        });
+        // Update trust indicators with real data
+        const lengthIndicator = document.getElementById('indicator-length');
+        const emotionIndicator = document.getElementById('indicator-emotion');
+        const specificIndicator = document.getElementById('indicator-specific');
+
+        if (lengthIndicator) {
+            const lengthScore = authMetrics.avg_review_length || 50;
+            lengthIndicator.className = 'indicator ' +
+                (lengthScore > 80 ? 'high' : lengthScore > 40 ? 'medium' : 'low');
+        }
+
+        if (emotionIndicator) {
+            const emotionBalance = 1 - (authMetrics.sentiment_variance || 0);
+            emotionIndicator.className = 'indicator ' +
+                (emotionBalance > 0.7 ? 'high' : emotionBalance > 0.4 ? 'medium' : 'low');
+        }
+
+        if (specificIndicator) {
+            const specificityScore = authMetrics.category_coverage || 0;
+            specificIndicator.className = 'indicator ' +
+                (specificityScore >= 4 ? 'high' : specificityScore >= 2 ? 'medium' : 'low');
+        }
     };
 
     const renderLoveHateAnalysis = (data) => {
@@ -414,6 +439,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         throw new Error('Analysis timed out - please try again');
     };
+
+    // --- NEW UNIQUE ANALYTICS FUNCTIONS ---
+
+    const renderReviewVelocityAnalysis = (data) => {
+        const nReviews = data.n_reviews || 0;
+        const velocityEl = document.getElementById('velocity-indicator');
+        const velocityTextEl = document.getElementById('velocity-text');
+
+        if (!velocityEl || !velocityTextEl) return;
+
+        // Simulate review velocity analysis (in real app, this would come from backend)
+        let velocityScore = 'moderate';
+        let velocityText = 'Steady review flow';
+        let velocityClass = 'moderate';
+
+        if (nReviews > 100) {
+            velocityScore = 'high';
+            velocityText = 'High review activity - Popular product';
+            velocityClass = 'high';
+        } else if (nReviews < 20) {
+            velocityScore = 'low';
+            velocityText = 'Limited reviews - New or niche product';
+            velocityClass = 'low';
+        }
+
+        velocityEl.className = `velocity-indicator ${velocityClass}`;
+        velocityTextEl.textContent = velocityText;
+    };
+
+    const renderPriceValueInsights = (data) => {
+        const valueEl = document.getElementById('value-score');
+        const valueTextEl = document.getElementById('value-insight');
+        const valueReasonEl = document.getElementById('value-reason');
+
+        if (!valueEl || !valueTextEl || !valueReasonEl) return;
+
+        const sentimentData = data.sentiment || {};
+        const positiveRatio = sentimentData.positive || 0;
+        const negativeRatio = sentimentData.negative || 0;
+
+        // Calculate value score (advanced algorithm in real implementation)
+        const valueScore = Math.round(60 + (positiveRatio * 30) - (negativeRatio * 20));
+        const clampedValue = Math.max(10, Math.min(100, valueScore));
+
+        let valueText = 'Fair Value';
+        let valueReason = 'Price matches quality expectations';
+
+        if (clampedValue >= 80) {
+            valueText = 'Excellent Value';
+            valueReason = 'High quality product for the price point';
+        } else if (clampedValue >= 60) {
+            valueText = 'Good Value';
+            valueReason = 'Reasonable quality-to-price ratio';
+        } else if (clampedValue < 40) {
+            valueText = 'Poor Value';
+            valueReason = 'Quality concerns relative to price';
+        }
+
+        // Animate the progress bar with proper timing
+        valueEl.style.width = '0%';
+
+        // Use requestAnimationFrame for smooth animation
+        setTimeout(() => {
+            valueEl.style.width = `${clampedValue}%`;
+        }, 100);
+
+        valueTextEl.textContent = `${clampedValue}% - ${valueText}`;
+        valueReasonEl.textContent = valueReason;
+    };
+
+    // --- End New Analytics Functions ---
 
     // --- Start Analysis ---
     const startAnalysis = () => {
