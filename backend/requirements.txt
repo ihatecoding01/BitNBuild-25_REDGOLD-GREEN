@@ -7,6 +7,7 @@ pydantic-settings==2.2.1
 httpx==0.27.0
 beautifulsoup4==4.12.3
 lxml==5.2.1
+requests>=2.28.0
 
 # Browser automation
 playwright==1.44.0
@@ -21,3 +22,19 @@ scikit-learn>=1.0.0
 tqdm>=4.62.0
 matplotlib>=3.5.0
 seaborn>=0.11.0
+
+# Additional NLP and text processing
+nltk>=3.8.0
+spacy>=3.5.0
+textblob>=0.17.0
+wordcloud>=1.9.0
+
+# For async operations
+asyncio
+aiohttp>=3.8.0
+
+# For data validation and serialization
+pydantic>=2.0.0
+
+# For CORS handling
+python-multipart>=0.0.6
