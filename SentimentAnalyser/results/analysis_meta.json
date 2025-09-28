@@ -1,0 +1,10 @@
+{
+  "overall_avg_score": 0.35818395018577576,
+  "overall_rating_stars": 3.72,
+  "num_reviews_analyzed": 100,
+  "timings": {
+    "load_zero_shot": 6.999907782301307e-07,
+    "load_sentiment": 2.8653466000105254,
+    "analysis_loop": 12.10303370001202
+  }
+}

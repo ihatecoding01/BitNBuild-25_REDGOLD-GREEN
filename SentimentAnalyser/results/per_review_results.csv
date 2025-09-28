@@ -1,0 +1,101 @@
+review_id,review_text,overall_label,overall_score_raw,overall_numeric,per_category_scores,rating_stars
+R001,Battery easily lasts all day even with heavy use — very impressed.,positive,0.9559853672981262,0.9559853672981262,"{""battery"": 0.9559853672981262}",4.91
+R002,Camera performs well in daylight but struggles a bit in low light; average overall.,neutral,0.5865300297737122,0.0,"{""camera"": 0.0}",3.0
+R003,Performance is snappy and responsive for everyday apps and multitasking.,positive,0.8636884093284607,0.8636884093284607,"{""performance"": 0.8636884093284607}",4.73
+R004,Charging is inconsistent — sometimes it stalls at 40% and takes forever to resume.,negative,0.7997515797615051,-0.7997515797615051,{},1.4
+R005,"Sleek design and premium feel, though it picks up fingerprints easily.",neutral,0.5097678899765015,0.0,"{""design"": 0.0}",3.0
+R006,"Display is bright with accurate colors, but the contrast seems off in some apps.",neutral,0.4656923711299896,0.0,{},3.0
+R007,Camera captures great detail and is quick to focus most of the time.,positive,0.9318050742149353,0.9318050742149353,"{""camera"": 0.9318050742149353}",4.86
+R008,"Audio is crisp and clear for music and calls, pleasantly surprised.",positive,0.9678843021392822,0.9678843021392822,{},4.94
+R009,Touchscreen occasionally misses taps and scrolling can be jittery.,negative,0.748501718044281,-0.748501718044281,"{""screen"": -0.748501718044281}",1.5
+R010,"Great for photography, but battery life is average — may need a top-up by evening.",neutral,0.4225112795829773,0.0,"{""battery"": 0.0}",3.0
+R011,Screen resolution is fantastic — videos look crisp and vibrant.,positive,0.9863688945770264,0.9863688945770264,"{""screen"": 0.9863688945770264}",4.97
+R012,Performance is solid; no lag even with heavy apps and games.,positive,0.8495631814002991,0.8495631814002991,"{""performance"": 0.8495631814002991}",4.7
+R013,Fingerprint sensor is hit-or-miss and sometimes refuses to recognize saved prints.,negative,0.8484054207801819,-0.8484054207801819,{},1.3
+R014,Battery optimization helps but I still get less than ideal screen-on time with heavy use.,negative,0.5912019610404968,-0.5912019610404968,"{""battery"": -0.5912019610404968, ""screen"": -0.5912019610404968}",1.82
+R015,Lightweight and sturdy — comfortable to hold for long periods.,positive,0.7630280256271362,0.7630280256271362,{},4.53
+R016,High refresh rate makes scrolling and gaming feel incredibly smooth.,positive,0.9493808746337891,0.9493808746337891,{},4.9
+R017,Plenty of storage; haven't run into space issues even with lots of apps.,positive,0.47831466794013977,0.47831466794013977,{},3.96
+R018,Phone overheats during long gaming sessions and throttles performance.,negative,0.8057057857513428,-0.8057057857513428,"{""performance"": -0.8057057857513428}",1.39
+R019,Face unlock is quick and reliable in most lighting conditions.,positive,0.7933411598205566,0.7933411598205566,{},4.59
+R020,Excellent value for money — feels like a much pricier phone.,positive,0.7748332023620605,0.7748332023620605,{},4.55
+R021,Camera is good but the processing sometimes oversharpens photos; mixed results.,neutral,0.5186455845832825,0.0,"{""camera"": 0.0}",3.0
+R022,Battery drains quickly when using navigation apps — disappointing endurance.,negative,0.9599857330322266,-0.9599857330322266,"{""battery"": -0.9599857330322266}",1.08
+R023,Colors on the OLED display are vibrant and lifelike.,positive,0.9495127201080322,0.9495127201080322,{},4.9
+R024,Very reliable so far — no crashes or unexpected restarts.,positive,0.8974006772041321,0.8974006772041321,{},4.79
+R025,Build feels solid but the edges can be a bit sharp if held tightly.,neutral,0.6752235293388367,0.0,{},3.0
+R026,"Speakers are loud and clear, great for conference calls and music.",positive,0.9711412191390991,0.9711412191390991,{},4.94
+R027,"Device randomly reboots a couple of times a week, pretty frustrating.",negative,0.9204911589622498,-0.9204911589622498,{},1.16
+R028,Battery easily lasts a day and a half with moderate use.,positive,0.6164224147796631,0.6164224147796631,"{""battery"": 0.6164224147796631}",4.23
+R029,Display is bright outdoors but viewing angles could be better.,positive,0.544051468372345,0.544051468372345,{},4.09
+R030,Selfie camera gives sharp results and skin tones look natural.,positive,0.8881932497024536,0.8881932497024536,"{""camera"": 0.8881932497024536}",4.78
+R031,"Operating system is generally smooth, though customization options are limited.",positive,0.6614699363708496,0.6614699363708496,{},4.32
+R032,Amazing performance — runs games and heavy apps without hiccups.,positive,0.933976411819458,0.933976411819458,"{""performance"": 0.933976411819458}",4.87
+R033,5G connectivity is spotty in my area and often falls back to 4G.,negative,0.5207551121711731,-0.5207551121711731,{},1.96
+R034,Slim profile and easy to pocket — very convenient for travel.,positive,0.9518964886665344,0.9518964886665344,{},4.9
+R035,Battery saver mode helps but it reduces background app performance noticeably.,positive,0.5917252898216248,0.5917252898216248,"{""battery"": 0.5917252898216248, ""performance"": 0.5917252898216248}",4.18
+R036,Screen size strikes a good balance for productivity and media consumption.,positive,0.8973594903945923,0.8973594903945923,"{""screen"": 0.8973594903945923}",4.79
+R037,Bluetooth keeps dropping when connected to my car stereo.,negative,0.8835813403129578,-0.8835813403129578,{},1.23
+R038,Exceeded expectations — smooth day-to-day performance and solid battery life.,positive,0.9457792639732361,0.9457792639732361,"{""battery"": 0.9457792639732361, ""performance"": 0.9457792639732361}",4.89
+R039,"Calls are clear most of the time, though sometimes the mic sounds distant.",neutral,0.6997353434562683,0.0,{},3.0
+R040,Dependable for daily use; haven't experienced major issues.,neutral,0.6536622643470764,0.0,{},3.0
+R041,Security updates are infrequent and I had to wait a long time for a patch.,negative,0.8741214871406555,-0.8741214871406555,{},1.25
+R042,Premium feel and smooth glass back; worth the price for me.,positive,0.7760225534439087,0.7760225534439087,"{""price"": 0.7760225534439087}",4.55
+R043,Colors look natural but HDR performance is inconsistent across apps.,negative,0.4819716215133667,-0.4819716215133667,"{""performance"": -0.4819716215133667}",2.04
+R044,Great for video calls — both audio and video are reliable.,positive,0.9630031585693359,0.9630031585693359,{},4.93
+R045,Charging sometimes stalls and the cable connection feels loose.,negative,0.8804818987846375,-0.8804818987846375,{},1.24
+R046,Outstanding performance for heavy multitasking and content creation.,positive,0.8894661664962769,0.8894661664962769,"{""performance"": 0.8894661664962769}",4.78
+R047,"Good overall, but I wish the manufacturer offered more bundled storage options.",positive,0.6900466680526733,0.6900466680526733,{},4.38
+R048,Lightweight and comfortable — easy to use with one hand.,positive,0.8606366515159607,0.8606366515159607,{},4.72
+R049,"After a month, small scratches appeared on the screen despite careful use.",negative,0.6672926545143127,-0.6672926545143127,"{""screen"": -0.6672926545143127}",1.67
+R050,Build quality feels sturdy and premium; no creaks or flex.,positive,0.7477571964263916,0.7477571964263916,{},4.5
+R051,Zoom is decent but digital zoom loses detail beyond 3x.,neutral,0.5772948265075684,0.0,{},3.0
+R052,"Ample storage for apps and media, hasn't been an issue.",neutral,0.5831526517868042,0.0,{},3.0
+R053,Auto-brightness oscillates and is distracting in mixed lighting.,negative,0.6628141403198242,-0.6628141403198242,{},1.67
+R054,Perfect display for movies — colors and contrast are very satisfying.,positive,0.985929548740387,0.985929548740387,{},4.97
+R055,"Battery performs well most days, but some days it drains faster than expected.",negative,0.4566516578197479,-0.4566516578197479,"{""battery"": -0.4566516578197479}",2.09
+R056,Handles heavy multitasking effortlessly; no lag switching between apps.,positive,0.7781470417976379,0.7781470417976379,{},4.56
+R057,Battery significantly degrades after heavy use — doesn't last as advertised.,negative,0.9370235800743103,-0.9370235800743103,"{""battery"": -0.9370235800743103}",1.13
+R058,Good mix of style and function — many of my friends asked about it.,positive,0.8161979913711548,0.8161979913711548,{},4.63
+R059,"Photos are usually sharp, but sometimes colors look slightly off.",neutral,0.6930004358291626,0.0,{},3.0
+R060,Touchscreen responsiveness is excellent; no noticeable lag.,positive,0.9429035186767578,0.9429035186767578,"{""screen"": 0.9429035186767578}",4.89
+R061,Random freezes when switching apps — had to force restart a couple of times.,negative,0.6395661234855652,-0.6395661234855652,{},1.72
+R062,Apps open instantly and performance remains consistent under load.,positive,0.7003706693649292,0.7003706693649292,"{""performance"": 0.7003706693649292}",4.4
+R063,"Good overall sound quality, but bass is a bit lacking for music lovers.",neutral,0.4545477628707886,0.0,{},3.0
+R064,Sleek design — looks great and gets noticed without feeling flashy.,positive,0.9609135389328003,0.9609135389328003,"{""design"": 0.9609135389328003}",4.92
+R065,Battery life is inconsistent — some days it drains quickly even on light use.,negative,0.9246869087219238,-0.9246869087219238,"{""battery"": -0.9246869087219238}",1.15
+R066,Versatile camera system produces great results in most lighting situations.,positive,0.9365737438201904,0.9365737438201904,"{""camera"": 0.9365737438201904}",4.87
+R067,"Performance is good, but the phone feels warm after extended use.",positive,0.939864456653595,0.939864456653595,"{""performance"": 0.939864456653595}",4.88
+R068,Excellent battery backup — really handy when traveling.,positive,0.9512208104133606,0.9512208104133606,"{""battery"": 0.9512208104133606}",4.9
+R069,Display flickers occasionally and requires a reboot to fix.,negative,0.6574898958206177,-0.6574898958206177,{},1.69
+R070,Overall a very reliable daily driver with solid battery and performance.,positive,0.931388258934021,0.931388258934021,"{""battery"": 0.931388258934021, ""performance"": 0.931388258934021}",4.86
+R071,Lots of customization options but some advanced settings are hidden.,neutral,0.7536560893058777,0.0,{},3.0
+R072,Night photography is impressive — low-light shots come out clear.,positive,0.9806153178215027,0.9806153178215027,{},4.96
+R073,Phone occasionally disconnects from Wi-Fi and takes time to reconnect.,negative,0.5196774005889893,-0.5196774005889893,{},1.96
+R074,Charging speed is excellent — very convenient when short on time.,positive,0.9767909049987793,0.9767909049987793,{},4.95
+R075,"Display colors are rich, but automatic color adjustments can be distracting.",negative,0.5117893815040588,-0.5117893815040588,{},1.98
+R076,Robust performance across apps; hasn't slowed down since day one.,positive,0.9289204478263855,0.9289204478263855,"{""performance"": 0.9289204478263855}",4.86
+R077,Battery performance dropped after a few updates and charging times increased.,negative,0.5835940837860107,-0.5835940837860107,"{""battery"": -0.5835940837860107, ""performance"": -0.5835940837860107}",1.83
+R078,Fantastic camera software — photos look great straight out of the phone.,positive,0.9850608706474304,0.9850608706474304,"{""camera"": 0.9850608706474304}",4.97
+R079,Gaming runs smoothly but the device can feel slightly heavy during long sessions.,neutral,0.6205365657806396,0.0,{},3.0
+R080,Futuristic design and premium materials — really happy with the purchase.,positive,0.9834359288215637,0.9834359288215637,"{""design"": 0.9834359288215637}",4.97
+R081,Some customization options cause instability — a few widgets crash intermittently.,negative,0.8787303566932678,-0.8787303566932678,{},1.24
+R082,Fast and fluid performance day-to-day; very reliable.,positive,0.8145613074302673,0.8145613074302673,"{""performance"": 0.8145613074302673}",4.63
+R083,"Lightweight and portable, but I would've preferred slightly better battery life.",neutral,0.5664265751838684,0.0,"{""battery"": 0.0}",3.0
+R084,"Camera captures vibrant, detailed shots consistently.",positive,0.8273561596870422,0.8273561596870422,"{""camera"": 0.8273561596870422}",4.65
+R085,"Charging port feels loose after a couple of months of use, worrying for long-term durability.",negative,0.8306092619895935,-0.8306092619895935,{},1.34
+R086,Software feels polished and responsive; very snappy navigation.,positive,0.9098547697067261,0.9098547697067261,{},4.82
+R087,Definitely recommended — been using it daily without regrets.,positive,0.9290329217910767,0.9290329217910767,{},4.86
+R088,Display brightness is excellent — very usable even in bright outdoor conditions.,positive,0.9767826199531555,0.9767826199531555,{},4.95
+R089,Battery reliably lasts comfortably through the day even with heavy usage.,positive,0.7551511526107788,0.7551511526107788,"{""battery"": 0.7551511526107788}",4.51
+R090,Love the color and finish — stands out without being ostentatious.,positive,0.9547942876815796,0.9547942876815796,{},4.91
+R091,Runs smoothly with no overheating — reliable performance for daily tasks.,positive,0.8726766705513,0.8726766705513,"{""performance"": 0.8726766705513}",4.75
+R092,Excellent phone — feels worth the price and performs consistently.,positive,0.9664400815963745,0.9664400815963745,"{""price"": 0.9664400815963745}",4.93
+R093,Sharp screen and vivid colors make media really enjoyable.,positive,0.9740773439407349,0.9740773439407349,"{""screen"": 0.9740773439407349}",4.95
+R094,Durable build and premium materials — holds up well.,positive,0.9132093787193298,0.9132093787193298,{},4.83
+R095,Battery charges fully in under an hour most of the time — very convenient.,positive,0.9238376021385193,0.9238376021385193,"{""battery"": 0.9238376021385193}",4.85
+R096,Handles heavy tasks easily — performance remains top-notch.,positive,0.8719664216041565,0.8719664216041565,"{""performance"": 0.8719664216041565}",4.74
+R097,Perfect size for everyday use and fits comfortably in hand.,positive,0.9307990074157715,0.9307990074157715,{},4.86
+R098,Loving the overall experience — dependable and well-rounded phone.,positive,0.9860755801200867,0.9860755801200867,{},4.97
+R099,Camera performance is consistently outstanding across modes.,positive,0.9324895739555359,0.9324895739555359,"{""camera"": 0.9324895739555359, ""performance"": 0.9324895739555359}",4.86
+R100,Very satisfied — feature set and battery life meet my daily needs.,positive,0.9757831692695618,0.9757831692695618,"{""battery"": 0.9757831692695618}",4.95
