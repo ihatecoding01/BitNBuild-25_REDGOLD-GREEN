@@ -1,0 +1,10 @@
+# Heavy analysis dependencies (install in active venv)
+transformers==4.44.2
+pandas==2.2.2
+numpy>=1.26.0
+scikit-learn==1.5.1
+tqdm==4.66.5
+# torch left unpinned; choose CPU or CUDA version manually, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# or for CUDA (example for 12.1):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121

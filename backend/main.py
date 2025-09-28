@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from api import endpoints
-from core.errors import JobNotFound, job_not_found_handler
-from core.middleware import add_middleware
+from .api import endpoints
+from .core.errors import JobNotFound, job_not_found_handler
+from .core.middleware import add_middleware
 
 # --- App Initialization ---
 app = FastAPI(

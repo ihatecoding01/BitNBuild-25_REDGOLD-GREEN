@@ -2,10 +2,10 @@ import uuid
 import datetime
 from typing import Dict, Any
 
-from api.models import ErrorDetail
-from adapters.scraper import scrape_reviews
-from adapters.nlp import analyze_reviews
-from core.errors import BaseReviewRadarException
+from ..api.models import ErrorDetail
+from ..adapters.scraper import scrape_reviews
+from ..adapters.nlp import analyze_reviews
+from ..core.errors import BaseReviewRadarException
 
 # In-memory store for job status and results.
 # In a real application, this would be Redis, a database, etc.
@@ -26,7 +26,7 @@ def create_job() -> str:
 def get_job_or_fail(job_id: str) -> Dict[str, Any]:
     """Retrieves a job from the store or raises a JobNotFound error."""
     if job_id not in job_store:
-        from core.errors import JobNotFound
+        from ..core.errors import JobNotFound
         raise JobNotFound(f"Job with ID '{job_id}' not found.")
     return job_store[job_id]
 
@@ -53,7 +53,7 @@ async def run_analysis_pipeline(job_id: str, url: str, max_reviews: int):
         # Catch known exceptions from our application (scraper, nlp)
         # and map them to structured errors.
         print(f"Job {job_id} failed with a known error: {e}")
-        from core.errors import ScrapeDisallowed, ScrapingError, AnalysisError, NoReviewsFoundError
+        from ..core.errors import ScrapeDisallowed, ScrapingError, AnalysisError, NoReviewsFoundError
         
         error_code = "internal_error"
         if isinstance(e, ScrapeDisallowed):

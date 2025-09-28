@@ -5,8 +5,11 @@ from .models import (
     AnalyzeRequest, AnalyzeJobSubmissionResponse, JobResultResponse,
     DoneJobResponse, PendingJobResponse, ErrorJobResponse, StatusOnlyResponse
 )
-from jobs import manager
-from core.config import settings
+from pydantic import BaseModel, Field
+from typing import List
+from analysis.review_analysis import analyze_reviews_advanced
+from ..jobs import manager
+from ..core.config import settings
 
 router = APIRouter()
 
@@ -100,3 +103,36 @@ async def get_status(job_id: str):
     """A lightweight endpoint to only check the status of a job."""
     job = manager.get_job_or_fail(job_id)
     return StatusOnlyResponse(status=job["status"])
+
+# --- New synchronous analysis endpoints ---
+
+class ReviewsAnalyzeRequest(BaseModel):
+    reviews: List[str] = Field(..., description="List of raw review texts")
+    aspect_method: str = Field("keywords", description="Aspect method: keywords or zsc")
+
+class ReviewsAnalyzeResponse(BaseModel):
+    sentiment: dict
+    counts: dict
+    n_reviews: int
+    categories: List[dict]
+
+@router.post("/analyze/reviews", response_model=ReviewsAnalyzeResponse, tags=["Analysis"], dependencies=[Depends(verify_api_key)])
+async def analyze_reviews_direct(payload: ReviewsAnalyzeRequest):
+    data = analyze_reviews_advanced(payload.reviews, aspect_method=payload.aspect_method, cache_sentiment=True)
+    return data
+
+class TextAnalyzeRequest(BaseModel):
+    text: str = Field(..., description="Blob of text containing potentially multiple sentences")
+    splitter: str = Field("sentence", description="Split mode: sentence or line")
+    aspect_method: str = Field("keywords")
+
+@router.post("/analyze/text", response_model=ReviewsAnalyzeResponse, tags=["Analysis"], dependencies=[Depends(verify_api_key)])
+async def analyze_text(payload: TextAnalyzeRequest):
+    if payload.splitter == 'line':
+        reviews = [r.strip() for r in payload.text.splitlines() if r.strip()]
+    else:
+        import re
+        parts = re.split(r'(?<=[.!?])\s+', payload.text.strip())
+        reviews = [p.strip() for p in parts if p.strip()]
+    data = analyze_reviews_advanced(reviews, aspect_method=payload.aspect_method, cache_sentiment=True)
+    return data

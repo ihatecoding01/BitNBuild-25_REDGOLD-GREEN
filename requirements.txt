@@ -1,0 +1,19 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-dotenv==1.0.1
+
+# Heavy analysis stack
+transformers==4.44.2
+pandas==2.2.2
+scikit-learn==1.5.1
+tqdm==4.66.5
+numpy>=1.26.0
+
+# Playwright for scraping (browsers installed separately via `playwright install chromium`)
+playwright==1.46.0
+
+# Torch left unpinned: install a variant suitable for your platform (examples)
+# CPU:  pip install torch --index-url https://download.pytorch.org/whl/cpu
+# CUDA: pip install torch --index-url https://download.pytorch.org/whl/cu121
