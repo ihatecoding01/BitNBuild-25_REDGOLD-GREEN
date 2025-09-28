@@ -1,5 +1,5 @@
-from pydantic import BaseModel, HttpUrl, Field
-from typing import List, Dict, Optional, Literal, Union
+from pydantic import BaseModel, Field
+from typing import List, Union, Literal
 from datetime import datetime
 import uuid
 
@@ -7,23 +7,22 @@ import uuid
 
 class AnalyzeRequest(BaseModel):
     """Request body for the /analyze endpoint."""
-    url: HttpUrl = Field(..., example="https://www.example-ecommerce.com/product/123")
-    max_reviews: Optional[int] = Field(
-        default=None, 
-        gt=0, 
-        description="Max reviews to scrape. Overrides server default if provided."
+    reviews: List[str] = Field(
+        ..., 
+        min_items=1, 
+        description="Raw review texts extracted from the product page."
     )
 
 # --- Response Models & Schemas ---
 
 class AnalyzeJobSubmissionResponse(BaseModel):
-    """Immediate response after submitting a URL for analysis."""
+    """Immediate response after submitting reviews for analysis."""
     job_id: str = Field(..., example=str(uuid.uuid4()))
 
 class ErrorDetail(BaseModel):
     """Structured error information."""
-    code: str = Field(..., example="scrape_failed")
-    message: str = Field(..., example="The scraper could not extract reviews from the provided URL.")
+    code: str = Field(..., example="analysis_failed")
+    message: str = Field(..., example="The analysis could not process the provided reviews.")
 
 class SentimentBreakdown(BaseModel):
     positive: float = Field(..., ge=0, le=1, example=0.82)

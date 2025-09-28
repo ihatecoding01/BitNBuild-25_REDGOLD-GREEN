@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Revuze</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- Logo SVG -->
+            <svg class="logo-svg" width="24" height="24" viewBox="0 0 512 512" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="256" cy="256" r="240" fill="#4A90E2" stroke="#FFFFFF" stroke-width="16" />
+                <path d="M362.8 362.8L296 296m32-80a88 88 0 11-176 0 88 88 0 01176 0z" stroke="#FFFFFF"
+                    stroke-width="32" stroke-linecap="round" />
+                <path d="M224 216v80m48-80v80m-96-80v80" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" />
+            </svg>
+            <h1 class="title">Revuze</h1>
+        </header>
+
+        <main id="main-content">
+            <!-- Idle View -->
+            <div id="idle-view" class="view active">
+                <p class="description">Click below to scrape and analyze the reviews on this product page.</p>
+                <button id="analyze-button" class="button">Analyze Reviews</button>
+            </div>
+
+            <!-- Loading View -->
+            <div id="loading-view" class="view">
+                <svg class="spinner" width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+                        opacity=".25" />
+                    <path
+                        d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z" />
+                </svg>
+                <p class="loading-text">Scraping and analyzing reviews...</p>
+            </div>
+
+            <!-- Results View -->
+            <div id="results-view" class="view">
+                <div class="chart-container">
+                    <canvas id="sentiment-chart"></canvas>
+                </div>
+                <div class="analytics-container">
+                    <!-- Purchase Confidence Score -->
+                    <div class="analytics-card confidence">
+                        <h3 class="card-title">🎯 Purchase Confidence</h3>
+                        <div class="confidence-meter">
+                            <div id="confidence-bar" class="confidence-fill"></div>
+                            <span id="confidence-text" class="confidence-label">Calculating...</span>
+                        </div>
+                        <p id="confidence-reason" class="confidence-description">Analysis in progress...</p>
+                    </div>
+
+                    <!-- Authenticity & Trust Score -->
+                    <div class="analytics-card authenticity">
+                        <h3 class="card-title">🔍 Review Authenticity</h3>
+                        <div class="authenticity-display">
+                            <div class="trust-score">
+                                <span id="trust-percentage" class="trust-value">--%</span>
+                                <span class="trust-label">Authentic</span>
+                            </div>
+                            <div class="trust-indicators">
+                                <div class="indicator" id="indicator-length">📝 Detail Level</div>
+                                <div class="indicator" id="indicator-emotion">💭 Emotional Balance</div>
+                                <div class="indicator" id="indicator-specific">🔧 Specific Mentions</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What Users Love vs Hate -->
+                    <div class="analytics-card comparison">
+                        <h3 class="card-title">❤️ Love vs 💔 Hate Analysis</h3>
+                        <div class="comparison-grid">
+                            <div class="comparison-side love">
+                                <h4>Top Praised</h4>
+                                <ul id="love-points" class="comparison-list">
+                                    <li>Loading...</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-side hate">
+                                <h4>Main Complaints</h4>
+                                <ul id="hate-points" class="comparison-list">
+                                    <li>Loading...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smart Category Analysis -->
+                    <div class="analytics-card categories">
+                        <h3 class="card-title">📊 Smart Category Analysis</h3>
+                        <div id="category-breakdown" class="category-list">
+                            <div class="category-item">
+                                <span class="category-name">Loading...</span>
+                                <span class="category-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="review-count">Based on <strong id="n-reviews">0</strong> reviews.</p>
+            </div>
+
+            <!-- Error View -->
+            <div id="error-view" class="view">
+                <svg class="error-icon" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                        fill="#E53E3E" />
+                </svg>
+                <h2 class="error-title">Analysis Failed</h2>
+                <p id="error-message">Could not scrape or analyze reviews.</p>
+                <button id="retry-button" class="button button-secondary">Try Again</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="libs/chart.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>

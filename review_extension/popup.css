@@ -1,0 +1,420 @@
+/* Import a clean, modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-blue: #4A90E2;
+    --positive-green: #2E7D32;
+    --negative-red: #C62828;
+    --neutral-gray: #B0BEC5;
+    --background-light: #F7F9FC;
+    --text-dark: #263238;
+    --text-light: #546E7A;
+    --border-color: #ECEFF1;
+    --white: #FFFFFF;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+.container {
+    width: 380px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-svg {
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0;
+}
+
+/* View Management */
+.view {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.view.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Idle & Error Views */
+.description {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+}
+
+.error-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 12px 0 4px 0;
+}
+
+#error-message {
+    font-size: 13px;
+    color: var(--text-light);
+    margin: 0 0 20px 0;
+}
+
+/* Buttons */
+.button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.button:hover {
+    background-color: #357ABD;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.button-secondary {
+    background-color: var(--border-color);
+    color: var(--text-dark);
+}
+
+.button-secondary:hover {
+    background-color: #CFD8DC;
+}
+
+/* Loading Spinner */
+.loading-text {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    fill: var(--primary-blue);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Results View */
+.chart-container {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+}
+
+.analytics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.analytics-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--primary-blue);
+}
+
+.analytics-card.summary {
+    border-color: var(--primary-blue);
+}
+
+.analytics-card.categories {
+    border-color: var(--neutral-gray);
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    text-align: left;
+}
+
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stars {
+    font-size: 18px;
+    color: #FFB400;
+}
+
+.rating-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.summary-description {
+    font-size: 12px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-name {
+    font-size: 12px;
+    color: var(--text-dark);
+    text-transform: capitalize;
+}
+
+.category-score {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+.review-count {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* Unique Analytics Features */
+
+/* Purchase Confidence Card */
+.analytics-card.confidence {
+    border-color: #FF9800;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFFFFF 100%);
+}
+
+.confidence-meter {
+    position: relative;
+    height: 24px;
+    background-color: #F0F0F0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF5722 0%, #FF9800 50%, #4CAF50 100%);
+    border-radius: 12px;
+    transition: width 0.8s ease-in-out;
+    width: 0%;
+}
+
+.confidence-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.confidence-description {
+    font-size: 11px;
+    color: var(--text-light);
+    margin: 4px 0 0 0;
+    line-height: 1.3;
+}
+
+/* Authenticity Card */
+.analytics-card.authenticity {
+    border-color: #9C27B0;
+    background: linear-gradient(135deg, #F3E5F5 0%, #FFFFFF 100%);
+}
+
+.authenticity-display {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trust-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.trust-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #9C27B0;
+}
+
+.trust-label {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.trust-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.indicator {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background-color: rgba(156, 39, 176, 0.1);
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.indicator.high {
+    background-color: rgba(76, 175, 80, 0.2);
+}
+
+.indicator.medium {
+    background-color: rgba(255, 152, 0, 0.2);
+}
+
+.indicator.low {
+    background-color: rgba(244, 67, 54, 0.2);
+}
+
+/* Comparison Card */
+.analytics-card.comparison {
+    border-color: #E91E63;
+    background: linear-gradient(135deg, #FCE4EC 0%, #FFFFFF 100%);
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.comparison-side h4 {
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    text-align: center;
+}
+
+.comparison-side.love h4 {
+    color: #4CAF50;
+}
+
+.comparison-side.hate h4 {
+    color: #F44336;
+}
+
+.comparison-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.comparison-list li {
+    font-size: 10px;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    line-height: 1.2;
+}
+
+.comparison-side.love .comparison-list li {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-left: 2px solid #4CAF50;
+}
+
+.comparison-side.hate .comparison-list li {
+    background-color: rgba(244, 67, 54, 0.1);
+    border-left: 2px solid #F44336;
+}
+
+/* Enhanced Categories Card */
+.analytics-card.categories {
+    border-color: #2196F3;
+    background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 400px) {
+    .container {
+        width: 320px;
+        padding: 12px;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .trust-indicators {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .indicator {
+        flex: 1;
+        min-width: 0;
+    }
+}

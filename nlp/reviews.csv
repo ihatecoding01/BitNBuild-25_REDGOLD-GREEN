@@ -1,0 +1,101 @@
+review_id,reviewer_name,review_text,rating,sentiment,review_date,product_category
+R001,Alice Johnson,"Battery easily lasts all day even with heavy use — very impressed.",5,positive,2024-12-22,Smartphones
+R002,Bob Smith,"Camera performs well in daylight but struggles a bit in low light; average overall.",3,neutral,2024-12-28,Smartphones
+R003,Grace Lee,"Performance is snappy and responsive for everyday apps and multitasking.",5,positive,2025-01-04,Smartphones
+R004,David Wilson,"Charging is inconsistent — sometimes it stalls at 40% and takes forever to resume.",2,negative,2025-01-07,Smartphones
+R005,Emily Brown,"Sleek design and premium feel, though it picks up fingerprints easily.",4,positive,2025-01-13,Smartphones
+R006,Frank Miller,"Display is bright with accurate colors, but the contrast seems off in some apps.",3,neutral,2025-01-18,Smartphones
+R007,Jack Robinson,"Camera captures great detail and is quick to focus most of the time.",5,positive,2025-01-21,Smartphones
+R008,Carol Davis,"Audio is crisp and clear for music and calls, pleasantly surprised.",4,positive,2025-01-26,Smartphones
+R009,Henry Taylor,"Touchscreen occasionally misses taps and scrolling can be jittery.",2,negative,2025-01-28,Smartphones
+R010,Ivy Chen,"Great for photography, but battery life is average — may need a top-up by evening.",3,neutral,2025-02-01,Smartphones
+R011,Alice Johnson,"Screen resolution is fantastic — videos look crisp and vibrant.",5,positive,2025-02-05,Smartphones
+R012,Bob Smith,"Performance is solid; no lag even with heavy apps and games.",5,positive,2025-02-10,Smartphones
+R013,Grace Lee,"Fingerprint sensor is hit-or-miss and sometimes refuses to recognize saved prints.",2,negative,2025-02-14,Smartphones
+R014,David Wilson,"Battery optimization helps but I still get less than ideal screen-on time with heavy use.",3,neutral,2025-02-19,Smartphones
+R015,Emily Brown,"Lightweight and sturdy — comfortable to hold for long periods.",4,positive,2025-02-23,Smartphones
+R016,Frank Miller,"High refresh rate makes scrolling and gaming feel incredibly smooth.",5,positive,2025-02-28,Smartphones
+R017,Jack Robinson,"Plenty of storage; haven't run into space issues even with lots of apps.",5,positive,2025-03-03,Smartphones
+R018,Carol Davis,"Phone overheats during long gaming sessions and throttles performance.",2,negative,2025-03-07,Smartphones
+R019,Henry Taylor,"Face unlock is quick and reliable in most lighting conditions.",5,positive,2025-03-12,Smartphones
+R020,Ivy Chen,"Excellent value for money — feels like a much pricier phone.",5,positive,2025-03-15,Smartphones
+R021,Alice Johnson,"Camera is good but the processing sometimes oversharpens photos; mixed results.",3,neutral,2025-03-19,Smartphones
+R022,Bob Smith,"Battery drains quickly when using navigation apps — disappointing endurance.",2,negative,2025-03-23,Smartphones
+R023,Grace Lee,"Colors on the OLED display are vibrant and lifelike.",5,positive,2025-03-26,Smartphones
+R024,David Wilson,"Very reliable so far — no crashes or unexpected restarts.",5,positive,2025-03-31,Smartphones
+R025,Emily Brown,"Build feels solid but the edges can be a bit sharp if held tightly.",3,neutral,2025-04-03,Smartphones
+R026,Frank Miller,"Speakers are loud and clear, great for conference calls and music.",5,positive,2025-04-07,Smartphones
+R027,Jack Robinson,"Device randomly reboots a couple of times a week, pretty frustrating.",1,negative,2025-04-10,Smartphones
+R028,Carol Davis,"Battery easily lasts a day and a half with moderate use.",5,positive,2025-04-13,Smartphones
+R029,Henry Taylor,"Display is bright outdoors but viewing angles could be better.",3,neutral,2025-04-18,Smartphones
+R030,Ivy Chen,"Selfie camera gives sharp results and skin tones look natural.",5,positive,2025-04-21,Smartphones
+R031,Alice Johnson,"Operating system is generally smooth, though customization options are limited.",3,neutral,2025-04-25,Smartphones
+R032,Bob Smith,"Amazing performance — runs games and heavy apps without hiccups.",5,positive,2025-04-29,Smartphones
+R033,Grace Lee,"5G connectivity is spotty in my area and often falls back to 4G.",2,negative,2025-05-02,Smartphones
+R034,David Wilson,"Slim profile and easy to pocket — very convenient for travel.",4,positive,2025-05-06,Smartphones
+R035,Emily Brown,"Battery saver mode helps but it reduces background app performance noticeably.",3,neutral,2025-05-10,Smartphones
+R036,Frank Miller,"Screen size strikes a good balance for productivity and media consumption.",4,positive,2025-05-13,Smartphones
+R037,Jack Robinson,"Bluetooth keeps dropping when connected to my car stereo.",2,negative,2025-05-17,Smartphones
+R038,Carol Davis,"Exceeded expectations — smooth day-to-day performance and solid battery life.",5,positive,2025-05-21,Smartphones
+R039,Henry Taylor,"Calls are clear most of the time, though sometimes the mic sounds distant.",3,neutral,2025-05-25,Smartphones
+R040,Ivy Chen,"Dependable for daily use; haven't experienced major issues.",5,positive,2025-05-29,Smartphones
+R041,Alice Johnson,"Security updates are infrequent and I had to wait a long time for a patch.",2,negative,2025-06-01,Smartphones
+R042,Bob Smith,"Premium feel and smooth glass back; worth the price for me.",5,positive,2025-06-04,Smartphones
+R043,Grace Lee,"Colors look natural but HDR performance is inconsistent across apps.",3,neutral,2025-06-08,Smartphones
+R044,David Wilson,"Great for video calls — both audio and video are reliable.",5,positive,2025-06-12,Smartphones
+R045,Emily Brown,"Charging sometimes stalls and the cable connection feels loose.",1,negative,2025-06-15,Smartphones
+R046,Frank Miller,"Outstanding performance for heavy multitasking and content creation.",5,positive,2025-06-19,Smartphones
+R047,Jack Robinson,"Good overall, but I wish the manufacturer offered more bundled storage options.",3,neutral,2025-06-22,Smartphones
+R048,Carol Davis,"Lightweight and comfortable — easy to use with one hand.",4,positive,2025-06-26,Smartphones
+R049,Henry Taylor,"After a month, small scratches appeared on the screen despite careful use.",2,negative,2025-06-30,Smartphones
+R050,Ivy Chen,"Build quality feels sturdy and premium; no creaks or flex.",5,positive,2025-07-02,Smartphones
+R051,Alice Johnson,"Zoom is decent but digital zoom loses detail beyond 3x.",3,neutral,2025-07-06,Smartphones
+R052,Bob Smith,"Ample storage for apps and media, hasn't been an issue.",5,positive,2025-07-09,Smartphones
+R053,Grace Lee,"Auto-brightness oscillates and is distracting in mixed lighting.",2,negative,2025-07-13,Smartphones
+R054,David Wilson,"Perfect display for movies — colors and contrast are very satisfying.",5,positive,2025-07-17,Smartphones
+R055,Emily Brown,"Battery performs well most days, but some days it drains faster than expected.",3,neutral,2025-07-20,Smartphones
+R056,Frank Miller,"Handles heavy multitasking effortlessly; no lag switching between apps.",5,positive,2025-07-24,Smartphones
+R057,Jack Robinson,"Battery significantly degrades after heavy use — doesn't last as advertised.",1,negative,2025-07-28,Smartphones
+R058,Carol Davis,"Good mix of style and function — many of my friends asked about it.",4,positive,2025-07-31,Smartphones
+R059,Henry Taylor,"Photos are usually sharp, but sometimes colors look slightly off.",3,neutral,2025-08-03,Smartphones
+R060,Ivy Chen,"Touchscreen responsiveness is excellent; no noticeable lag.",5,positive,2025-08-06,Smartphones
+R061,Alice Johnson,"Random freezes when switching apps — had to force restart a couple of times.",2,negative,2025-08-10,Smartphones
+R062,Bob Smith,"Apps open instantly and performance remains consistent under load.",5,positive,2025-08-14,Smartphones
+R063,Grace Lee,"Good overall sound quality, but bass is a bit lacking for music lovers.",3,neutral,2025-08-18,Smartphones
+R064,David Wilson,"Sleek design — looks great and gets noticed without feeling flashy.",4,positive,2025-08-21,Smartphones
+R065,Emily Brown,"Battery life is inconsistent — some days it drains quickly even on light use.",2,negative,2025-08-25,Smartphones
+R066,Frank Miller,"Versatile camera system produces great results in most lighting situations.",5,positive,2025-08-28,Smartphones
+R067,Jack Robinson,"Performance is good, but the phone feels warm after extended use.",3,neutral,2025-09-01,Smartphones
+R068,Carol Davis,"Excellent battery backup — really handy when traveling.",5,positive,2025-09-04,Smartphones
+R069,Henry Taylor,"Display flickers occasionally and requires a reboot to fix.",2,negative,2025-09-07,Smartphones
+R070,Ivy Chen,"Overall a very reliable daily driver with solid battery and performance.",5,positive,2025-09-10,Smartphones
+R071,Alice Johnson,"Lots of customization options but some advanced settings are hidden.",3,neutral,2025-09-14,Smartphones
+R072,Bob Smith,"Night photography is impressive — low-light shots come out clear.",5,positive,2025-09-17,Smartphones
+R073,Grace Lee,"Phone occasionally disconnects from Wi-Fi and takes time to reconnect.",2,negative,2025-09-20,Smartphones
+R074,David Wilson,"Charging speed is excellent — very convenient when short on time.",5,positive,2025-09-23,Smartphones
+R075,Emily Brown,"Display colors are rich, but automatic color adjustments can be distracting.",3,neutral,2025-09-26,Smartphones
+R076,Frank Miller,"Robust performance across apps; hasn't slowed down since day one.",5,positive,2025-09-28,Smartphones
+R077,Jack Robinson,"Battery performance dropped after a few updates and charging times increased.",2,negative,2025-09-30,Smartphones
+R078,Carol Davis,"Fantastic camera software — photos look great straight out of the phone.",5,positive,2025-10-03,Smartphones
+R079,Henry Taylor,"Gaming runs smoothly but the device can feel slightly heavy during long sessions.",3,neutral,2025-10-07,Smartphones
+R080,Ivy Chen,"Futuristic design and premium materials — really happy with the purchase.",5,positive,2025-10-10,Smartphones
+R081,Alice Johnson,"Some customization options cause instability — a few widgets crash intermittently.",2,negative,2025-10-13,Smartphones
+R082,Bob Smith,"Fast and fluid performance day-to-day; very reliable.",5,positive,2025-10-16,Smartphones
+R083,Grace Lee,"Lightweight and portable, but I would've preferred slightly better battery life.",3,neutral,2025-10-19,Smartphones
+R084,David Wilson,"Camera captures vibrant, detailed shots consistently.",5,positive,2025-10-22,Smartphones
+R085,Emily Brown,"Charging port feels loose after a couple of months of use, worrying for long-term durability.",1,negative,2025-10-25,Smartphones
+R086,Frank Miller,"Software feels polished and responsive; very snappy navigation.",5,positive,2025-10-28,Smartphones
+R087,Jack Robinson,"Definitely recommended — been using it daily without regrets.",5,positive,2025-11-01,Smartphones
+R088,Carol Davis,"Display brightness is excellent — very usable even in bright outdoor conditions.",5,positive,2025-11-04,Smartphones
+R089,Henry Taylor,"Battery reliably lasts comfortably through the day even with heavy usage.",5,positive,2025-11-07,Smartphones
+R090,Ivy Chen,"Love the color and finish — stands out without being ostentatious.",5,positive,2025-11-10,Smartphones
+R091,Alice Johnson,"Runs smoothly with no overheating — reliable performance for daily tasks.",5,positive,2025-11-13,Smartphones
+R092,Bob Smith,"Excellent phone — feels worth the price and performs consistently.",5,positive,2025-11-16,Smartphones
+R093,Grace Lee,"Sharp screen and vivid colors make media really enjoyable.",5,positive,2025-11-19,Smartphones
+R094,David Wilson,"Durable build and premium materials — holds up well.",5,positive,2025-11-22,Smartphones
+R095,Emily Brown,"Battery charges fully in under an hour most of the time — very convenient.",4,positive,2025-11-25,Smartphones
+R096,Frank Miller,"Handles heavy tasks easily — performance remains top-notch.",5,positive,2025-11-28,Smartphones
+R097,Jack Robinson,"Perfect size for everyday use and fits comfortably in hand.",5,positive,2025-12-01,Smartphones
+R098,Carol Davis,"Loving the overall experience — dependable and well-rounded phone.",5,positive,2025-12-04,Smartphones
+R099,Henry Taylor,"Camera performance is consistently outstanding across modes.",5,positive,2025-12-07,Smartphones
+R100,Ivy Chen,"Very satisfied — feature set and battery life meet my daily needs.",5,positive,2025-12-10,Smartphones

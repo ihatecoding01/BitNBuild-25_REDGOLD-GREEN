@@ -1,12 +1,31 @@
-import time
-import random
 from typing import List, Dict, Any
-from collections import Counter
 from core.errors import AnalysisError
+
+# Import the advanced sentiment analyzer
+try:
+    from .sentiment_integration import analyze_reviews_advanced
+    USE_ADVANCED_ANALYZER = True
+    print("✅ Advanced sentiment analyzer loaded successfully")
+except ImportError as e:
+    print(f"⚠️ Advanced analyzer not available ({e}), falling back to mock")
+    USE_ADVANCED_ANALYZER = False
+    import time
+    import random
+    from collections import Counter
 
 def analyze_reviews(reviews: List[str]) -> Dict[str, Any]:
     """
-    Mock NLP analysis function.
+    Main NLP analysis function that uses advanced sentiment analysis when available,
+    otherwise falls back to mock analysis for testing.
+    """
+    if USE_ADVANCED_ANALYZER:
+        return analyze_reviews_advanced(reviews)
+    else:
+        return analyze_reviews_mock(reviews)
+
+def analyze_reviews_mock(reviews: List[str]) -> Dict[str, Any]:
+    """
+    Mock NLP analysis function (fallback when advanced analyzer unavailable).
     - Simulates processing time.
     - Returns a deterministic, structured analysis based on input.
     - Can be made to fail to test error handling.
@@ -51,7 +70,6 @@ def analyze_reviews(reviews: List[str]) -> Dict[str, Any]:
     if sentiment_sum != 1.0 and total > 0:
         diff = 1.0 - sentiment_sum
         sentiment_breakdown[max(sentiment_breakdown, key=sentiment_breakdown.get)] += diff
-
 
     analysis = {
         "sentiment": sentiment_breakdown,

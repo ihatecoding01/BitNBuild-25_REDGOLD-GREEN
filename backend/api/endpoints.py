@@ -1,5 +1,5 @@
-from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException, status, Request
-from typing import Optional, Union
+from fastapi import APIRouter, Depends, Header, HTTPException, status
+from typing import Optional
 
 from .models import (
     AnalyzeRequest, AnalyzeJobSubmissionResponse, JobResultResponse,
@@ -10,20 +10,23 @@ from core.config import settings
 
 router = APIRouter()
 
-# --- Security Dependency ---
+
 async def verify_api_key(x_api_key: Optional[str] = Header(None)):
     """Dependency to verify API key if it's enabled in settings."""
     if settings.ENABLE_API_KEY:
         if not x_api_key or x_api_key != settings.API_KEY:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid API Key")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid API Key"
+            )
     return x_api_key
 
-# --- Endpoints ---
 
 @router.get("/health", tags=["General"])
 async def health_check():
     """Simple health check endpoint."""
     return {"status": "ok"}
+
 
 @router.post(
     "/analyze",
@@ -32,24 +35,20 @@ async def health_check():
     tags=["Analysis"],
     dependencies=[Depends(verify_api_key)]
 )
-async def analyze_url(
-    request: AnalyzeRequest,
-    background_tasks: BackgroundTasks,
-):
+async def analyze_reviews(request: AnalyzeRequest):
     """
-    Accepts a URL for review analysis.
-    This endpoint is non-blocking and immediately returns a job ID.
+    Accepts a list of reviews for analysis.
+    This endpoint immediately returns a job ID while analysis runs synchronously.
     """
-    # Clamp the number of reviews to the configured limit
-    max_reviews = request.max_reviews or settings.MAX_REVIEWS_DEFAULT
-    if max_reviews > settings.MAX_REVIEWS_LIMIT:
-        max_reviews = settings.MAX_REVIEWS_LIMIT
-    
-    # Create a job and add the pipeline execution to background tasks
-    job_id = manager.create_job()
-    background_tasks.add_task(manager.run_analysis_pipeline, job_id, str(request.url), max_reviews)
-    
+    if not request.reviews or len(request.reviews) == 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No reviews provided for analysis."
+        )
+
+    job_id = manager.enqueue_job(request.reviews)
     return AnalyzeJobSubmissionResponse(job_id=job_id)
+
 
 @router.get(
     "/results/{job_id}",
@@ -70,15 +69,13 @@ async def get_results(job_id: str):
     - Returns 500 if the job failed, with error details.
     """
     job = manager.get_job_or_fail(job_id)
-    
+
     if job["status"] == "pending":
         return PendingJobResponse(job_id=job_id, status="pending")
-    
+
     if job["status"] == "error":
-        # Return a 500-level status code to indicate server-side failure
         return ErrorJobResponse(job_id=job_id, status="error", error=job["error"])
 
-    # If status is "done", format the successful response
     result_data = job["result"]
     return DoneJobResponse(
         job_id=job_id,
@@ -90,6 +87,7 @@ async def get_results(job_id: str):
         n_reviews=result_data["n_reviews"],
         generated_at=job["updated_at"]
     )
+
 
 @router.get(
     "/status/{job_id}",
