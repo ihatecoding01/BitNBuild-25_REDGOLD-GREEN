@@ -106,7 +106,26 @@ def analyze_reviews_advanced(reviews: List[str]) -> Dict[str, Any]:
             }
         }
         
-        print(f"ADVANCED NLP: Analysis complete. Overall rating: {result['overall_rating_stars']:.1f} stars")
+        print(f"ADVANCED NLP: Analysis complete. Processed {total_reviews} reviews with {len(top_keywords)} key insights.")
+        
+        analysis = {
+            "sentiment": sentiment_breakdown,
+            "counts": counts,
+            "top_positive": top_positive,
+            "top_negative": top_negative,
+            "n_reviews": total_reviews,
+            "overall_rating_stars": meta.get('overall_rating_stars', 3.0),
+            "categories_analyzed": len(category_data),
+            "category_breakdown": category_data[:6],  # Top 6 categories
+            
+            # Authenticity indicators for unique analysis
+            "authenticity_metrics": {
+                "avg_review_length": float(avg_review_length),
+                "sentiment_variance": float(sentiment_variance),
+                "keyword_diversity": len(set([kw['term'] for kw in top_positive + top_negative])),
+                "category_coverage": len([c for c in category_data if c['count'] >= 2])
+            }
+        }
         return result
         
     except Exception as e:
